@@ -1,0 +1,905 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alihan'ın kişisel yazılım portföyü">
+    <title>Alihan | Kişisel Portföy</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --turquoise: #31AAA9;
+            --cream: #F8E0A4;
+            --red: #A82020;
+            --dark-red: #6C1A1A;
+            --dark: #171717;
+            --light: #fffaf0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        section {
+            padding: 100px 0;
+            scroll-margin-top: 85px;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: rgba(248, 224, 164, .97);
+            backdrop-filter: blur(12px);
+            padding: 12px 0;
+            box-shadow: 0 3px 20px rgba(0, 0, 0, .06);
+        }
+
+        /* LOGO.PNG */
+        .navbar-logo {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+            transition: .3s;
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.08);
+        }
+
+        .nav-link {
+            color: var(--dark-red);
+            font-weight: 500;
+            margin-left: 12px;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            color: var(--turquoise);
+        }
+
+        .section-title {
+            font-size: clamp(30px, 4vw, 42px);
+            font-weight: 800;
+            color: var(--dark-red);
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 45px;
+        }
+
+        .highlight {
+            color: var(--turquoise);
+        }
+
+        /* ANA SAYFA */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(49,170,169,.22), transparent 30%),
+                linear-gradient(135deg, var(--cream), #fffaf0);
+            padding-top: 130px;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: rgba(49,170,169,.15);
+            color: #176e6d;
+            padding: 9px 17px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .hero-title {
+            font-size: clamp(42px, 7vw, 76px);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--dark-red);
+            margin-bottom: 22px;
+        }
+
+        .hero-text {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.9;
+            max-width: 550px;
+            margin-bottom: 30px;
+        }
+
+        .btn-main,
+        .btn-outline {
+            padding: 13px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: .3s;
+            margin: 4px;
+        }
+
+        .btn-main {
+            background: var(--red);
+            color: white;
+            border: 2px solid var(--red);
+        }
+
+        .btn-main:hover {
+            background: var(--dark-red);
+            border-color: var(--dark-red);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            color: var(--dark-red);
+            border: 2px solid var(--dark-red);
+        }
+
+        .btn-outline:hover {
+            background: var(--dark-red);
+            color: white;
+        }
+
+        .hero-card {
+            width: min(100%, 370px);
+            margin: auto;
+            background: var(--dark-red);
+            border-radius: 35px;
+            padding: 35px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(108,26,26,.2);
+            transform: rotate(2deg);
+            transition: .4s;
+        }
+
+        .hero-card:hover {
+            transform: rotate(0) translateY(-8px);
+        }
+
+        .avatar {
+            width: 155px;
+            height: 155px;
+            background: var(--cream);
+            color: var(--dark-red);
+            border: 6px solid rgba(255,255,255,.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 55px;
+            font-weight: 800;
+            margin: 0 auto 25px;
+        }
+
+        .hero-card h3 {
+            font-size: 27px;
+            font-weight: 700;
+        }
+
+        .hero-card p {
+            color: #f3dada;
+        }
+
+        .code-decoration {
+            display: inline-block;
+            color: var(--cream);
+            background: rgba(255,255,255,.1);
+            border-radius: 10px;
+            padding: 9px 14px;
+            margin-top: 15px;
+            font-family: monospace;
+        }
+
+        /* HAKKIMDA */
+        #about {
+            background: white;
+        }
+
+        .about-box {
+            background: var(--light);
+            padding: 35px;
+            border-radius: 22px;
+            height: 100%;
+            border-left: 5px solid var(--turquoise);
+        }
+
+        .about-box h3 {
+            color: var(--dark-red);
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .about-description {
+            color: #555;
+            line-height: 2;
+        }
+
+        .info-item {
+            padding: 13px 0;
+            border-bottom: 1px solid #e9e3d6;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item strong {
+            color: var(--dark-red);
+        }
+
+        /* YETENEKLER */
+        #skills {
+            background: var(--cream);
+        }
+
+        .skill-card {
+            background: white;
+            padding: 30px 24px;
+            border-radius: 20px;
+            height: 100%;
+            transition: .3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.08);
+        }
+
+        .skill-icon {
+            width: 58px;
+            height: 58px;
+            background: rgba(49,170,169,.15);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h4 {
+            color: var(--dark-red);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .skill-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .learning-note {
+            background: var(--dark-red);
+            color: white;
+            padding: 22px 25px;
+            border-radius: 15px;
+            margin-top: 35px;
+        }
+
+        /* PROJELER */
+        #projects {
+            background: white;
+        }
+
+        .project-card {
+            background: var(--light);
+            border-radius: 22px;
+            overflow: hidden;
+            height: 100%;
+            transition: .3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,.04);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0,0,0,.1);
+        }
+
+        .project-cover {
+            min-height: 185px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+        }
+
+        .cover-one {
+            background: linear-gradient(135deg, var(--turquoise), #b3e4df);
+        }
+
+        .cover-two {
+            background: linear-gradient(135deg, var(--red), #e5a09a);
+        }
+
+        .cover-three {
+            background: linear-gradient(135deg, var(--cream), #fff3d1);
+        }
+
+        .project-content {
+            padding: 27px;
+        }
+
+        .project-content h4 {
+            color: var(--dark-red);
+            font-weight: 700;
+            font-size: 21px;
+        }
+
+        .project-content p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(49,170,169,.14);
+            color: #176e6d;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 11px;
+            border-radius: 20px;
+            margin: 3px;
+        }
+
+        /* HEDEFLER */
+        #goals {
+            background: var(--dark-red);
+            color: white;
+        }
+
+        #goals .section-title {
+            color: var(--cream);
+        }
+
+        #goals .section-subtitle {
+            color: #ead1d1;
+        }
+
+        .goal-card {
+            border: 1px solid rgba(255,255,255,.2);
+            background: rgba(255,255,255,.06);
+            padding: 28px;
+            border-radius: 20px;
+            height: 100%;
+            transition: .3s;
+        }
+
+        .goal-card:hover {
+            background: rgba(255,255,255,.12);
+            transform: translateY(-5px);
+        }
+
+        .goal-card h4 {
+            color: var(--cream);
+            font-size: 20px;
+            font-weight: 700;
+            margin: 15px 0 10px;
+        }
+
+        .goal-card p {
+            color: #eadada;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .goal-icon {
+            font-size: 35px;
+        }
+
+        /* İLETİŞİM */
+        #contact {
+            background: var(--light);
+        }
+
+        .contact-box {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 45px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,.05);
+        }
+
+        .contact-box h3 {
+            color: var(--dark-red);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #171717;
+            color: #ddd;
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        footer .footer-name {
+            color: var(--turquoise);
+            font-weight: 700;
+        }
+
+        /* YUKARI ÇIK */
+        #backToTop {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 48px;
+            height: 48px;
+            border: none;
+            border-radius: 14px;
+            background: var(--turquoise);
+            color: white;
+            font-size: 23px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 5px 18px rgba(0,0,0,.15);
+        }
+
+        #backToTop:hover {
+            background: var(--dark-red);
+        }
+
+        /* ANİMASYON */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                padding-top: 15px;
+            }
+
+            .nav-link {
+                margin-left: 0;
+                padding: 10px 0;
+            }
+
+            #home {
+                text-align: center;
+            }
+
+            .hero-text {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-card {
+                margin-top: 50px;
+            }
+
+            section {
+                padding: 75px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 43px;
+            }
+
+            .about-box,
+            .contact-box {
+                padding: 25px;
+            }
+
+            .navbar-logo {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+
+            <!-- logo.png DOSYASI -->
+            <a href="#home" aria-label="Alihan ana sayfa">
+                <img
+                    src="./logo.png"
+                    alt="Alihan AA Logo"
+                    class="navbar-logo"
+                    width="58"
+                    height="58"
+                >
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu"
+                    aria-controls="navbarMenu"
+                    aria-expanded="false"
+                    aria-label="Menüyü aç veya kapat">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Ana Sayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Hakkımda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Yeteneklerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projelerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#goals">Hedeflerim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ANA SAYFA -->
+    <section id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <span class="hero-label">💻 Genç Yazılım Geliştirici Adayı</span>
+
+                    <h1 class="hero-title">
+                        Merhaba,<br>
+                        Ben <span class="highlight">Alihan!</span>
+                    </h1>
+
+                    <p class="hero-text">
+                        13 yaşındayım ve yazılım dersleri alıyorum.
+                        Kod yazarak yeni şeyler öğrenmeyi, kendi projelerimi
+                        geliştirmeyi ve hayal ettiğim fikirleri gerçeğe
+                        dönüştürmeyi seviyorum.
+                    </p>
+
+                    <a href="#projects" class="btn-main">Projelerimi Keşfet ↗</a>
+                    <a href="#about" class="btn-outline">Beni Tanı</a>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="hero-card">
+                        <div class="avatar">A</div>
+                        <h3>Alihan</h3>
+                        <p>Merak et · Öğren · Geliştir</p>
+                        <div class="code-decoration">
+                            &lt;code&gt; Hayallerim &lt;/code&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HAKKIMDA -->
+    <section id="about">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2 class="section-title">Hakkımda <span class="highlight">.</span></h2>
+                <p class="section-subtitle">Beni biraz daha yakından tanı.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7 reveal">
+                    <div class="about-box">
+                        <h3>Ben kimim?</h3>
+                        <p class="about-description">
+                            Ben Alihan. 13 yaşında, teknolojiye ve yazılıma
+                            ilgi duyan bir öğrenciyim. Yazılım dersleri alarak
+                            programlamanın temellerini öğreniyorum.
+                            Kendi web sitelerimi ve oyun fikirlerimi geliştirmek,
+                            yeni teknolojiler keşfetmek ve her projede
+                            kendimi biraz daha ilerletmek istiyorum.
+                        </p>
+                        <p class="about-description mb-0">
+                            Benim için yazılım sadece kod yazmak değil;
+                            fikir üretmek, problem çözmek ve hayal gücünü
+                            kullanarak yeni şeyler ortaya çıkarmaktır.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 reveal">
+                    <div class="about-box">
+                        <h3>Kişisel Bilgiler</h3>
+                        <div class="info-item"><strong>İsim:</strong> Alihan</div>
+                        <div class="info-item"><strong>Yaş:</strong> 13</div>
+                        <div class="info-item"><strong>Uğraş:</strong> Öğrenci</div>
+                        <div class="info-item"><strong>İlgi alanı:</strong> Yazılım ve teknoloji</div>
+                        <div class="info-item"><strong>Takımım:</strong> ❤️💛 Galatasaray</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YETENEKLER -->
+    <section id="skills">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2 class="section-title">Yeteneklerim</h2>
+                <p class="section-subtitle">Öğrendiğim ve geliştirmek istediğim teknolojiler.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="skill-card">
+                        <div class="skill-icon">🌐</div>
+                        <h4>HTML</h4>
+                        <p>Web sayfalarının yapısını oluşturmayı ve içerikleri düzenlemeyi öğreniyorum.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="skill-card">
+                        <div class="skill-icon">🎨</div>
+                        <h4>CSS</h4>
+                        <p>Renkler, tasarım, animasyonlar ve mobil uyumlu sayfalar üzerinde çalışıyorum.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="skill-card">
+                        <div class="skill-icon">⚡</div>
+                        <h4>JavaScript</h4>
+                        <p>Web sitelerine etkileşim kazandırmayı ve programlama mantığını öğreniyorum.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 reveal">
+                    <div class="skill-card">
+                        <div class="skill-icon">🧩</div>
+                        <h4>Bootstrap</h4>
+                        <p>Hazır bileşenlerle responsive arayüzler hazırlamayı öğreniyorum.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-note reveal">
+                <strong>🚀 Öğrenmeye devam ediyorum!</strong>
+                <p class="mb-0 mt-2">
+                    Öğrendiklerimi sürekli geliştiriyor ve yeni projelerimde uyguluyorum.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJELER -->
+    <section id="projects">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2 class="section-title">Projelerim</h2>
+                <p class="section-subtitle">Fikirlerimi kodlarla hayata geçirdiğim alan.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="project-card">
+                        <div class="project-cover cover-one">🌐</div>
+                        <div class="project-content">
+                            <h4>Kişisel Web Sitesi</h4>
+                            <p>Kendimi tanıtmak, yeteneklerimi sergilemek ve projelerimi paylaşmak için hazırladığım portföy.</p>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="project-card">
+                        <div class="project-cover cover-two">🎮</div>
+                        <div class="project-content">
+                            <h4>Oyun Geliştirme</h4>
+                            <p>Kendi oyun fikirlerimi tasarlamak ve oyun mantığını öğrenmek istiyorum.</p>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Oyun</span>
+                            <span class="tag">Yaratıcılık</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="project-card">
+                        <div class="project-cover cover-three">💡</div>
+                        <div class="project-content">
+                            <h4>Yeni Fikirler</h4>
+                            <p>Yeni web projeleri ve yaratıcı yazılım fikirleri üzerinde çalışmayı hedefliyorum.</p>
+                            <span class="tag">Kodlama</span>
+                            <span class="tag">Tasarım</span>
+                            <span class="tag">Öğrenme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-secondary mt-4 small">
+                Proje kartları örnektir. Gerçek projelerini ekledikçe burayı güncelleyebilirsin.
+            </p>
+        </div>
+    </section>
+
+    <!-- HEDEFLER -->
+    <section id="goals">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2 class="section-title">Hedeflerim</h2>
+                <p class="section-subtitle">Gelecekte başarmak istediğim şeyler.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4 reveal">
+                    <div class="goal-card">
+                        <div class="goal-icon">📚</div>
+                        <h4>Kendimi Geliştirmek</h4>
+                        <p>Yazılım bilgimi artırmak, yeni diller öğrenmek ve daha iyi projeler geliştirmek.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 reveal">
+                    <div class="goal-card">
+                        <div class="goal-icon">🎮</div>
+                        <h4>Kendi Oyunumu Yapmak</h4>
+                        <p>Kendi fikirlerimden yola çıkarak eğlenceli ve özgün oyunlar tasarlamak.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 reveal">
+                    <div class="goal-card">
+                        <div class="goal-icon">🚀</div>
+                        <h4>Yeni Projeler Üretmek</h4>
+                        <p>İnsanların kullanabileceği web siteleri ve uygulamalar geliştirmek.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- İLETİŞİM -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-box reveal">
+                <div style="font-size:45px; margin-bottom:15px;">✉️</div>
+                <h3>Yeni Fikirler Keşfedelim!</h3>
+                <p>
+                    Yazılım öğrenmeye, yeni şeyler üretmeye ve kendimi
+                    geliştirmeye devam ediyorum. Bu portföy, yolculuğumun başlangıcı.
+                </p>
+                <a href="#home" class="btn-main">Başa Dön ↑</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="mb-1">
+                © <span id="year"></span>
+                <span class="footer-name">Alihan</span> · Kişisel Portföy
+            </p>
+            <small>Merakla öğren, tutkuyla üret. 💻</small>
+        </div>
+    </footer>
+
+    <!-- YUKARI ÇIK -->
+    <button id="backToTop" aria-label="Sayfanın başına dön">↑</button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Otomatik yıl
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        // Yukarı çık butonu
+        const backToTop = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", function () {
+            backToTop.style.display =
+                window.scrollY > 350 ? "block" : "none";
+        });
+
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // Mobil menü bağlantılarına basınca kapat
+        const navbarMenu = document.getElementById("navbarMenu");
+
+        document.querySelectorAll(".navbar-nav .nav-link").forEach(function (link) {
+            link.addEventListener("click", function () {
+                if (navbarMenu.classList.contains("show")) {
+                    bootstrap.Collapse.getOrCreateInstance(navbarMenu).hide();
+                }
+            });
+        });
+
+        // Kaydırma animasyonları
+        const revealElements = document.querySelectorAll(".reveal");
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12
+            });
+
+            revealElements.forEach(function (element) {
+                observer.observe(element);
+            });
+        } else {
+            revealElements.forEach(function (element) {
+                element.classList.add("visible");
+            });
+        }
+
+        // Logo yüklenemezse konsola uyarı yaz
+        const logo = document.querySelector(".navbar-logo");
+
+        logo.addEventListener("error", function () {
+            console.error(
+                "Logo yüklenemedi. logo.png dosyasının index.html ile aynı klasörde olduğunu kontrol et."
+            );
+        });
+    </script>
+
+</body>
+</html>
+```
