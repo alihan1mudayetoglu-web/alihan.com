@@ -618,7 +618,556 @@
             </div>
         </div>
     </section>
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#101b2b">
+  <title>Kanat Çırp! — Alihan</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700;800;900&display=swap');
+    :root{--ink:#142235;--muted:#758398;--cream:#f4f4ef;--yellow:#f8cf56;--teal:#32baa7;--border:#e6e8e5}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:#f4f4ef;color:var(--ink);font-family:Nunito,system-ui,sans-serif;display:grid;place-items:center;padding:20px}
+    .shell{width:min(1120px,100%)}
+    .topbar{height:55px;display:flex;align-items:flex-start;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:#1a2a3d;font-size:14px;font-weight:900;letter-spacing:1.7px}
+    .brand b{color:#e8ae28}
+    .brand-mark{width:26px;height:26px;border-radius:8px;background:#f7ca51;color:#273a4a;display:grid;place-items:center;font-size:18px}
+    .top-note,.credit,footer,.card-label,.progress-caption{font:10px 'DM Mono',monospace;letter-spacing:1px}
+    .top-note{color:#82909d;display:flex;align-items:center;gap:8px;margin-top:8px}
+    .live-dot{width:7px;height:7px;background:#36bba0;border-radius:50%;box-shadow:0 0 0 4px #36bba01c}
+    .sound-button{border:1px solid var(--border);background:#fff;border-radius:50%;height:34px;width:34px;color:#68788a;font-size:17px;cursor:pointer}
+    .game-layout{display:grid;grid-template-columns:minmax(0,760px) 1fr;gap:26px;align-items:stretch}
+    .game-frame{height:min(72vh,580px);min-height:440px;position:relative;overflow:hidden;border-radius:17px;background:#9eddf0;box-shadow:0 22px 50px #172e401a,0 3px 8px #172e400b}
+    canvas{width:100%;height:100%;display:block}
+    .hud{position:absolute;inset:17px 18px auto;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none}
+    .pause-button{pointer-events:auto;border:1px solid #ffffff70;background:#10263b37;color:white;border-radius:10px;width:39px;height:37px;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;backdrop-filter:blur(8px)}
+    .pause-button span{height:13px;width:3px;background:#fff;border-radius:3px}
+    .score-pill{position:absolute;left:50%;transform:translateX(-50%);top:0;display:grid;justify-items:center;color:#fff;text-shadow:0 2px 8px #13324c72}
+    .score-pill small{font:9px 'DM Mono',monospace;letter-spacing:2px}
+    .score-pill b{font-size:42px;line-height:1.08}
+    .best-pill{margin-left:auto;color:white;background:#10263b36;border:1px solid #ffffff50;backdrop-filter:blur(8px);border-radius:8px;padding:8px 11px;font-size:12px}
+    .best-pill span{font:9px 'DM Mono',monospace;letter-spacing:.8px;margin:0 5px}
+    .best-pill b{font-size:13px}
+    .overlay{position:absolute;inset:0;display:grid;place-items:center;background:#10253a36;backdrop-filter:blur(2px);transition:opacity .2s}
+    .overlay.hidden{opacity:0;pointer-events:none}
+    .panel{width:min(380px,calc(100% - 34px));background:#fffef9;border:1px solid #fff;border-radius:18px;text-align:center;padding:22px 30px 18px;box-shadow:0 18px 55px #16344a35;position:relative;max-height:calc(100% - 24px);overflow:auto;animation:panel-in .28s ease-out}
+    @keyframes panel-in{from{transform:translateY(9px);opacity:.5}to{transform:translateY(0);opacity:1}}
+    .eyebrow{font:9px 'DM Mono',monospace;letter-spacing:1px;color:#8a97a3}
+    .eyebrow span{color:#e5b639;font-size:13px;margin-right:5px}
+    .hero-bird{height:108px;width:145px;object-fit:contain;image-rendering:pixelated;margin:4px auto -4px;filter:drop-shadow(0 8px 4px #142c351f)}
+    h1{font-size:36px;line-height:.97;letter-spacing:-1.6px;margin:2px 0 10px;font-weight:900}
+    h1 em,.side-card h2 em{font-style:normal;color:#e7b332}
+    #panelText{font-size:12px;color:#778594;line-height:1.7;margin:0 0 16px}
+    .menu-actions{display:grid;gap:10px}
+    .primary-button,.secondary-button{border:0;border-radius:9px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font:800 11px Nunito,sans-serif;letter-spacing:1px}
+    .primary-button{background:#f5c64b;color:#223348;box-shadow:0 4px 0 #d9a930}
+    .primary-button b,.secondary-button b{font-size:19px;line-height:10px}
+    .secondary-button{background:#31bba6;color:white}
+    .secondary-row{display:flex;justify-content:center;gap:25px;padding:3px 0}
+    .text-button{border:0;background:transparent;color:#607183;font:800 9px Nunito,sans-serif;letter-spacing:.8px;cursor:pointer;padding:4px}
+    .text-button span{font-size:13px;color:#e2b23d;margin-right:3px}
+    .hint{color:#99a3ad;font:9px 'DM Mono',monospace}
+    .hint kbd{font:9px 'DM Mono',monospace;background:#f1f2ee;border:1px solid #e4e7e4;border-radius:4px;padding:3px 5px;color:#647384}
+    .subview{text-align:left;color:#657486;font-size:12px;line-height:1.65}
+    .subview h2{color:#1a2b40;font-size:20px;margin:0 0 7px}
+    .subview p{margin:6px 0 13px}
+    .back-button{border:0;background:none;color:#a27415;font:800 10px Nunito,sans-serif;letter-spacing:1px;padding:9px 0;cursor:pointer}
+    .skin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .skin-card{background:#f4f5ef;border:1px solid transparent;border-radius:9px;padding:8px 4px 6px;cursor:pointer;color:#536174;font:700 9px Nunito,sans-serif}
+    .skin-card.selected{border-color:#e8b633;background:#fff9e7}
+    .skin-card img{width:55px;height:53px;object-fit:contain;image-rendering:pixelated;display:block;margin:0 auto 3px}
+    .touch-hint{display:none;position:absolute;bottom:15px;left:50%;transform:translateX(-50%);color:#fff;background:#14283e5c;border:1px solid #ffffff3d;padding:8px 12px;border-radius:20px;white-space:nowrap;font:9px 'DM Mono',monospace;letter-spacing:.8px;pointer-events:none}
+    .touch-hint span{color:#f4c64d;margin-left:5px}
+    .side-info{display:flex;flex-direction:column;gap:13px}
+    .side-card{background:#fff;border:1px solid #ebede8;border-radius:13px;padding:20px}
+    .mission-card{flex:1;min-height:280px}
+    .card-icon{font-size:20px;color:#e7b33b;margin-bottom:18px}
+    .card-label{color:#96a0a6;font-size:9px}
+    .side-card h2{font-size:23px;line-height:1.13;letter-spacing:-.6px;margin:9px 0}
+    .side-card p{font-size:11px;color:#7e8b99;line-height:1.7;margin:10px 0 20px}
+    .mini-progress{height:5px;border-radius:5px;background:#edf0ed;overflow:hidden;margin-top:29px}
+    .mini-progress span{height:100%;width:26%;display:block;background:#36bba6;border-radius:5px}
+    .progress-caption{display:flex;justify-content:space-between;color:#99a3ab;font-size:8px;margin-top:9px}
+    .tip-card{display:flex;gap:12px;align-items:flex-start;padding:15px 17px}
+    .tip-icon{height:28px;width:28px;display:grid;place-items:center;border-radius:8px;background:#fff5d9;color:#d9a932;flex:none}
+    .tip-card b{font-size:11px}
+    .tip-card p{margin:3px 0 0;font-size:10px;line-height:1.5}
+    .credit{color:#aab2b7;text-align:center;font-size:8px;padding-top:3px}
+    .credit span{color:#e4b43b;margin:0 6px}
+    footer{color:#9aa3a8;display:flex;justify-content:space-between;padding:18px 2px 0;font-size:8px}
+    footer i{font-style:normal;color:#e7b53c;margin-left:6px}
+    button:focus-visible,a:focus-visible{outline:3px solid #34baa6;outline-offset:3px}
+    @media(max-width:780px){
+      body{padding:12px;display:block}
+      .shell{width:100%}
+      .topbar{height:44px;align-items:flex-start}
+      .top-note{font-size:8px;letter-spacing:.5px}
+      .game-layout{display:block}
+      .game-frame{height:min(76svh,680px);height:min(76vh,680px);min-height:390px;border-radius:13px}
+      .side-info{display:none}
+      footer{padding-top:12px}
+      .panel{padding:17px 23px 14px}
+      .hero-bird{height:85px}
+      .touch-hint{display:block}
+      .hud{inset:12px 12px auto}
+      .score-pill b{font-size:36px}
+    }
+    @media(max-width:400px){
+      .game-frame{height:74vh;min-height:360px}
+      .top-note{display:none}
+      .panel{width:calc(100% - 22px);padding:15px 18px 12px}
+      .hero-bird{height:75px}
+      h1{font-size:32px}
+      #panelText{font-size:11px;margin-bottom:11px}
+      .menu-actions{gap:8px}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Ana menü" id="brandHome"><span class="brand-mark">✦</span><span>KANAT <b>ÇIRP!</b></span></a>
+      <div class="top-note"><span class="live-dot"></span> TEK SEVİYE · SINIRSIZ EĞLENCE</div>
+      <button class="sound-button" id="soundButton" aria-label="Sesi aç veya kapat" title="Sesi aç veya kapat">♫</button>
+    </header>
 
+    <section class="game-layout" aria-label="Kanat Çırp oyunu">
+      <div class="game-frame" id="gameFrame">
+        <canvas id="gameCanvas" aria-label="Flappy Bird oyun alanı"></canvas>
+        <div class="hud" id="hud">
+          <button class="pause-button" id="pauseButton" aria-label="Oyunu duraklat" title="Duraklat"><span></span><span></span></button>
+          <div class="score-pill"><small>SKOR</small><b id="score">0</b></div>
+          <div class="best-pill">✦ <span>EN İYİ</span> <b id="bestScore">0</b></div>
+        </div>
+        <div class="overlay" id="overlay">
+          <div class="panel" id="panel">
+            <div class="eyebrow"><span>✦</span> PIXEL GÖKYÜZÜNE HAZIR MISIN?</div>
+            <img class="hero-bird" id="heroBird" src="img/1.png" alt="Sarı pixel kuş">
+            <h1 id="panelTitle">Kanatlarını<br><em>aç!</em></h1>
+            <p id="panelText">Boruların arasından süzül, rekorunu kır.<br>Her dokunuşta bir kanat çırpışı!</p>
+            <div class="menu-actions" id="menuActions">
+              <button class="primary-button" id="startButton"><span>OYUNU BAŞLAT</span><b>→</b></button>
+              <button class="secondary-button" id="resumeButton" hidden><span>DEVAM ET</span><b>→</b></button>
+              <div class="secondary-row">
+                <button class="text-button" id="costumesButton"><span>◈</span> KOSTÜMLER</button>
+                <button class="text-button" id="aboutButton"><span>ⓘ</span> HAKKINDA</button>
+              </div>
+              <div class="hint"><kbd>SPACE</kbd> veya <kbd>↑</kbd> ile uç</div>
+            </div>
+            <div class="subview" id="subview" hidden></div>
+          </div>
+        </div>
+        <div class="touch-hint" id="touchHint">DOKUN VE KANAT ÇIRP <span>↗</span></div>
+      </div>
+      <aside class="side-info">
+        <div class="side-card mission-card"><div class="card-icon">✧</div><div class="card-label">GÖREVİN</div><h2>Aradaki boşluğu<br>bul ve <em>uç!</em></h2><p>Her boru bir puan. Bir yere çarpmadan ne kadar ileri gidebilirsin?</p><div class="mini-progress"><span></span></div><div class="progress-caption"><span>SEVİYE 01</span><span>GÖKYÜZÜ</span></div></div>
+        <div class="side-card tip-card"><div class="tip-icon">✦</div><div><b>Minik bir ipucu</b><p>Kısa dokunuşlar yüksekliği kontrol etmeyi kolaylaştırır.</p></div></div>
+        <div class="credit">PIXEL ART <span>×</span> KANAT SESİ</div>
+      </aside>
+    </section>
+    <footer><span>© 2025 KANAT ÇIRP!</span><span>YÜKSEK SKORUNU KORU <i>✦</i></span></footer>
+  </main>
+
+  <script>
+  (() => {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('overlay');
+    const panelTitle = document.getElementById('panelTitle');
+    const panelText = document.getElementById('panelText');
+    const heroBird = document.getElementById('heroBird');
+    const startButton = document.getElementById('startButton');
+    const resumeButton = document.getElementById('resumeButton');
+    const subview = document.getElementById('subview');
+    const menuActions = document.getElementById('menuActions');
+    const scoreEl = document.getElementById('score');
+    const bestEl = document.getElementById('bestScore');
+    const pauseButton = document.getElementById('pauseButton');
+    const touchHint = document.getElementById('touchHint');
+
+    const skins = [
+      {name:'Altın', src:'img/1.png'},
+      {name:'Bulut', src:'img/2.png'},
+      {name:'456', src:'img/3..png'},
+      {name:'Cadı', src:'img/4..png'},
+      {name:'Düdük', src:'img/5..png'},
+      {name:'Glitch', src:'img/6..png'},
+      {name:'İtalya Forması', src:'img/7..png'},
+      {name:'İtalyan Şıklığı', src:'img/8..png'},
+      {name:'Ay Yıldız', src:'img/9..png'},
+      {name:'Real Madrid', src:'img/10..png'}
+    ];
+
+    const loaded = skins.map(s => {
+      const im = new Image();
+      im.src = s.src;
+      return im;
+    });
+
+    let state = 'menu';
+    let selectedSkin = 0;
+    let score = 0;
+    let best = Number(localStorage.getItem('kanatBest') || 0);
+    let bird, pipes, particles, lastTime = 0, spawnTimer = 0, audioCtx = null, muted = false;
+    let width = 0, height = 0, dpr = 1, world = {ground:0};
+
+    bestEl.textContent = best;
+
+    function resize(){
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.round(width*dpr);
+      canvas.height = Math.round(height*dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      world.ground = height - Math.max(54, height*.105);
+      if (!bird || state === 'menu') resetBird();
+      draw();
+    }
+
+    function resetBird(){
+      bird={x:width*.28,y:height*.44,vy:0,rotation:0};
+      pipes=[];
+      particles=[];
+      score=0;
+      spawnTimer=.7;
+      scoreEl.textContent='0';
+    }
+
+    function showMenu(mode='main'){
+      state='menu';
+      overlay.classList.remove('hidden');
+      menuActions.hidden=false;
+      subview.hidden=true;
+      touchHint.style.display='none';
+      resumeButton.hidden=mode!=='pause';
+      startButton.hidden=mode==='pause';
+
+      if(mode==='pause'){
+        panelTitle.innerHTML='Bir mola<br><em>verelim!</em>';
+        panelText.textContent='Gökyüzü seni bekliyor. Hazır olduğunda devam et.';
+      } else if(mode==='over'){
+        panelTitle.innerHTML='Uçuş sona<br><em>erdi!</em>';
+        panelText.textContent=`Harika deneme! ${score} boruyu geçtin. Bir tur daha?`;
+      } else {
+        panelTitle.innerHTML='Kanatlarını<br><em>aç!</em>';
+        panelText.innerHTML='Boruların arasından süzül, rekorunu kır.<br>Her dokunuşta bir kanat çırpışı!';
+      }
+
+      heroBird.src=skins[selectedSkin].src;
+      draw();
+    }
+
+    function begin(){
+      resetBird();
+      state='playing';
+      overlay.classList.add('hidden');
+      touchHint.style.display='block';
+      lastTime=performance.now();
+      requestAnimationFrame(loop);
+      sound(620,.07);
+    }
+
+    function flap(){
+      if(state!=='playing') return;
+      bird.vy=-height*.64;
+      bird.rotation=-.35;
+      sound(500,.055);
+      for(let i=0;i<3;i++){
+        particles.push({
+          x:bird.x-14,
+          y:bird.y+5,
+          vx:-30-Math.random()*30,
+          vy:(Math.random()-.5)*50,
+          life:.3
+        });
+      }
+    }
+
+    function pause(){
+      if(state==='playing') showMenu('pause');
+    }
+
+    function sound(freq,duration){
+      if(muted) return;
+      try{
+        audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();
+        if(audioCtx.state==='suspended') audioCtx.resume();
+        const o=audioCtx.createOscillator();
+        const g=audioCtx.createGain();
+        o.type='sine';
+        o.frequency.value=freq;
+        g.gain.setValueAtTime(.035,audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start();
+        o.stop(audioCtx.currentTime+duration);
+      }catch{}
+    }
+
+    function addPipe(){
+      const gap=Math.max(145,height*.29);
+      const margin=75;
+      const top=margin+Math.random()*(world.ground-gap-margin*2);
+      pipes.push({x:width+30,top,gap,scored:false});
+    }
+
+    function gameOver(){
+      if(state!=='playing') return;
+      state='over';
+      sound(180,.25);
+      if(score>best){
+        best=score;
+        localStorage.setItem('kanatBest',best);
+        bestEl.textContent=best;
+      }
+      setTimeout(()=>showMenu('over'),450);
+    }
+
+    function loop(now){
+      if(state!=='playing') return;
+      const dt=Math.min((now-lastTime)/1000,.035);
+      lastTime=now;
+      update(dt);
+      draw();
+      if(state==='playing') requestAnimationFrame(loop);
+    }
+
+    function update(dt){
+      bird.vy+=height*1.75*dt;
+      bird.y+=bird.vy*dt;
+      bird.rotation=Math.min(.9,Math.max(-.45,bird.vy/(height*.9)));
+
+      spawnTimer-=dt;
+      if(spawnTimer<=0){
+        addPipe();
+        spawnTimer=1.65;
+      }
+
+      const speed=width*.38;
+      for(const p of pipes){
+        p.x-=speed*dt;
+        if(!p.scored&&p.x+58<bird.x){
+          p.scored=true;
+          score++;
+          scoreEl.textContent=score;
+          sound(850,.09);
+        }
+      }
+
+      pipes=pipes.filter(p=>p.x>-80);
+      for(const p of particles){
+        p.x+=p.vx*dt;
+        p.y+=p.vy*dt;
+        p.life-=dt;
+      }
+      particles=particles.filter(p=>p.life>0);
+
+      const r=15, bx=bird.x, by=bird.y;
+      if(by+r>=world.ground||by-r<=0){
+        gameOver();
+        return;
+      }
+
+      for(const p of pipes){
+        if(bx+r>p.x&&bx-r<p.x+58&&(by-r<p.top||by+r>p.top+p.gap)){
+          gameOver();
+          return;
+        }
+      }
+    }
+
+    function draw(){
+      if(!width||!height) return;
+
+      const sky=ctx.createLinearGradient(0,0,0,height);
+      sky.addColorStop(0,'#84d1ed');
+      sky.addColorStop(.68,'#c4e9ee');
+      sky.addColorStop(1,'#f5e8b4');
+      ctx.fillStyle=sky;
+      ctx.fillRect(0,0,width,height);
+
+      ctx.fillStyle='#b6dfc8';
+      ctx.beginPath();
+      ctx.moveTo(0,world.ground);
+      for(let x=0;x<=width+40;x+=40) ctx.lineTo(x,world.ground-38-Math.sin(x*.012+performance.now()*.00008)*19);
+      ctx.lineTo(width,world.ground);
+      ctx.fill();
+
+      ctx.fillStyle='#d4e5a8';
+      ctx.beginPath();
+      ctx.moveTo(0,world.ground);
+      for(let x=0;x<=width+35;x+=35) ctx.lineTo(x,world.ground-20-Math.sin(x*.018+1)*11);
+      ctx.lineTo(width,world.ground);
+      ctx.fill();
+
+      drawCloud(width*.17,height*.17,1);
+      drawCloud(width*.73,height*.28,.75);
+      drawCloud(width*.55,height*.1,.48);
+
+      for(const p of pipes) drawPipe(p);
+
+      ctx.fillStyle='#dfbd70';
+      ctx.fillRect(0,world.ground,width,height-world.ground);
+      ctx.fillStyle='#82c783';
+      ctx.fillRect(0,world.ground,width,10);
+      ctx.fillStyle='#f1d28a';
+      for(let x=-20;x<width+30;x+=26) ctx.fillRect(x,world.ground+17,13,5);
+
+      for(const q of particles){
+        ctx.globalAlpha=Math.max(0,q.life/.3);
+        ctx.fillStyle='#fff3b0';
+        ctx.fillRect(q.x,q.y,4,4);
+      }
+      ctx.globalAlpha=1;
+
+      if(bird){
+        ctx.save();
+        ctx.translate(bird.x,bird.y);
+        ctx.rotate(bird.rotation||0);
+        const im=loaded[selectedSkin];
+        if(im.complete&&im.naturalWidth){
+          const size=selectedSkin>=3?66:58;
+          ctx.imageSmoothingEnabled=false;
+          ctx.drawImage(im,-size/2,-size/2,size,size);
+        } else {
+          ctx.fillStyle='#ffd34c';
+          ctx.beginPath();
+          ctx.arc(0,0,19,0,Math.PI*2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    function drawCloud(x,y,s){
+      ctx.fillStyle='#ffffff85';
+      ctx.beginPath();
+      ctx.arc(x,y,19*s,0,Math.PI*2);
+      ctx.arc(x+19*s,y-7*s,23*s,0,Math.PI*2);
+      ctx.arc(x+43*s,y,17*s,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    function drawPipe(p){
+      const w=58,cap=9;
+      const grad=ctx.createLinearGradient(p.x,0,p.x+w,0);
+      grad.addColorStop(0,'#198e7b');
+      grad.addColorStop(.22,'#43c6a0');
+      grad.addColorStop(.8,'#32aa8e');
+      grad.addColorStop(1,'#168370');
+      ctx.fillStyle=grad;
+      ctx.strokeStyle='#116e66';
+      ctx.lineWidth=2;
+
+      ctx.fillRect(p.x,0,w,p.top-cap);
+      ctx.strokeRect(p.x+1,0,w-2,p.top-cap);
+      ctx.fillRect(p.x-5,p.top-cap-13,w+10,13);
+      ctx.strokeRect(p.x-5,p.top-cap-13,w+10,13);
+
+      const y=p.top+p.gap;
+      ctx.fillRect(p.x,y+cap,w,world.ground-y-cap);
+      ctx.strokeRect(p.x+1,y+cap,w-2,world.ground-y-cap);
+      ctx.fillRect(p.x-5,y,w+10,13);
+      ctx.strokeRect(p.x-5,y,w+10,13);
+    }
+
+    function showSub(which){
+      menuActions.hidden=true;
+      subview.hidden=false;
+      heroBird.style.display='none';
+      panelText.style.display='none';
+      panelTitle.style.display='none';
+
+      if(which==='skins'){
+        subview.innerHTML=`<button class="back-button" data-back>← MENÜYE DÖN</button><h2>Kostümünü seç</h2><p>Gökyüzüne hangi görünüşle çıkıyorsun?</p><div class="skin-grid">${skins.map((s,i)=>`<button class="skin-card ${i===selectedSkin?'selected':''}" data-skin="${i}"><img src="${s.src}" alt="${s.name}"><span>${s.name}</span></button>`).join('')}</div>`;
+      } else {
+        subview.innerHTML='<button class="back-button" data-back>← MENÜYE DÖN</button><h2>Nasıl oynanır?</h2><p><b>Dokun</b> ya da <b>Space / ↑</b> tuşuna basarak kanat çırp. Borulara ve yere çarpmadan aralıklardan geç; geçtiğin her boru sana bir puan kazandırır.</p><p>Duraklatmak için <b>Esc</b> tuşunu veya sol üstteki durdur düğmesini kullan.</p><p><b>Geliştirici:</b> Alihan</p>';
+      }
+
+      panelTitle.style.display='none';
+      heroBird.style.display='none';
+    }
+
+    function backToMain(){
+      panelTitle.style.display='';
+      panelText.style.display='';
+      heroBird.style.display='';
+      subview.hidden=true;
+      menuActions.hidden=false;
+    }
+
+    document.getElementById('startButton').addEventListener('click',begin);
+    resumeButton.addEventListener('click',()=>{
+      state='playing';
+      overlay.classList.add('hidden');
+      touchHint.style.display='block';
+      lastTime=performance.now();
+      requestAnimationFrame(loop);
+    });
+
+    document.getElementById('costumesButton').addEventListener('click',()=>showSub('skins'));
+    document.getElementById('aboutButton').addEventListener('click',()=>showSub('about'));
+
+    subview.addEventListener('click',e=>{
+      if(e.target.closest('[data-back]')){
+        backToMain();
+        return;
+      }
+      const b=e.target.closest('[data-skin]');
+      if(b){
+        selectedSkin=Number(b.dataset.skin);
+        heroBird.src=skins[selectedSkin].src;
+        showSub('skins');
+      }
+    });
+
+    pauseButton.addEventListener('click',pause);
+    document.getElementById('brandHome').addEventListener('click',e=>{
+      e.preventDefault();
+      if(state==='playing') pause();
+      else showMenu('main');
+    });
+
+    document.getElementById('soundButton').addEventListener('click',e=>{
+      muted=!muted;
+      e.currentTarget.textContent=muted?'×':'♫';
+      e.currentTarget.setAttribute('aria-label',muted?'Sesi aç':'Sesi kapat');
+    });
+
+    window.addEventListener('keydown',e=>{
+      if(['Space','ArrowUp'].includes(e.code)){
+        e.preventDefault();
+        if(state==='playing') flap();
+        else if(state==='menu'&&!overlay.classList.contains('hidden')&&subview.hidden) begin();
+      }
+      if(e.code==='Escape'){
+        e.preventDefault();
+        if(state==='playing') pause();
+        else if(state==='menu'){
+          if(!subview.hidden) backToMain();
+          else showMenu('main');
+        }
+      }
+    });
+
+    canvas.addEventListener('pointerdown',e=>{
+      e.preventDefault();
+      if(state==='playing') flap();
+    });
+
+    window.addEventListener('resize',resize);
+    resize();
+    showMenu('main');
+  })();
+  </script>
+</body>
+</html>
     <!-- HAKKIMDA -->
     <section id="about">
         <div class="container">
