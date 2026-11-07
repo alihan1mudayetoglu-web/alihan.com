@@ -1381,10 +1381,49 @@
     <button id="backToTop" aria-label="Sayfanın başına dön">↑</button>
 
 
+
+    <style>
+        /* Tanıtım videosunun ekranda fazla büyük görünmesini önler. */
+        #introVideoModal .modal-dialog {
+            width: calc(100% - 24px);
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #introVideoModal .modal-content {
+            max-height: 90vh;
+        }
+
+        #introVideoModal .modal-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+
+        #introVideo {
+            display: block;
+            width: 100%;
+            max-height: 68vh;
+            object-fit: contain;
+        }
+
+        @media (max-width: 576px) {
+            #introVideoModal .modal-dialog {
+                max-width: 94vw;
+            }
+
+            #introVideo {
+                max-height: 60vh;
+            }
+        }
+    </style>
+
     <!-- TANITIM VİDEOSU MODALI -->
     <div class="modal fade" id="introVideoModal" tabindex="-1"
          aria-labelledby="introVideoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark border-0 overflow-hidden">
                 <div class="modal-header border-0 py-2">
                     <h5 class="modal-title text-white" id="introVideoModalLabel">
