@@ -6,6 +6,59 @@
     <meta name="description" content="Alihan'ın kişisel yazılım portföyü">
     <title>Alihan | Kişisel Portföy</title>
 
+    <body>
+
+    <!-- Web sitenin mevcut kodları burada -->
+
+    <!-- TANITIM VİDEOSU -->
+    <section class="container my-5 text-center">
+        <h2>Web Sitemin Tanıtım Videosu</h2>
+        <p>Alihan.com'u daha yakından keşfet!</p>
+
+        <video controls playsinline
+               style="width:100%; max-width:800px; border-radius:15px;">
+            <source src="video.mp4" type="video/mp4">
+        </video>
+    </section>
+        
+<!-- Otomatik Tanıtım Videosu -->
+<div id="tanitimVideoModal"
+     style="position:fixed; inset:0; z-index:99999;
+     background:rgba(0,0,0,0.85);
+     display:flex; align-items:center;
+     justify-content:center; padding:15px;">
+
+    <video id="tanitimVideo"
+           autoplay
+           muted
+           playsinline
+           style="width:100%; max-width:800px;
+           max-height:85vh; border-radius:15px;">
+
+        <source src="video.mp4" type="video/mp4">
+
+    </video>
+
+</div>
+
+<script>
+const modal = document.getElementById("tanitimVideoModal");
+const video = document.getElementById("tanitimVideo");
+
+video.addEventListener("ended", function() {
+    modal.style.display = "none";
+});
+
+// Video başlatılamazsa modalı kapat
+video.play().catch(() => {
+    modal.style.display = "none";
+});
+</script>
+</body>
+
+
+</body>
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     
