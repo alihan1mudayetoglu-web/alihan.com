@@ -15,10 +15,10 @@
   const touchHint = document.getElementById('touchHint');
   const skins = [
     {name:'Altın', src:'img/1.png'}, {name:'Bulut', src:'img/2.png'},
-    {name:'456', src:'img/3..png'}, {name:'Cadı', src:'img/4..png'}, {name:'Düdük', src:'img/5..png'},
-    {name:'Glitch', src:'img/6..png'}, {name:'İtalya Forması', src:'img/7..png'},
-    {name:'İtalyan Şıklığı', src:'img/8..png'}, {name:'Ay Yıldız', src:'img/9..png'},
-    {name:'Real Madrid', src:'img/10..png'}
+    {name:'456', src:'img/3.png'}, {name:'Cadı', src:'img/4.png'}, {name:'Düdük', src:'img/5.png'},
+    {name:'Glitch', src:'img/6.png'}, {name:'İtalya Forması', src:'img/7.png'},
+    {name:'İtalyan Şıklığı', src:'img/8.png'}, {name:'Ay Yıldız', src:'img/9.png'},
+    {name:'Real Madrid', src:'img/10.png'}
   ];
   const loaded = skins.map(s => { const im = new Image(); im.src = s.src; return im; });
   let state = 'menu', selectedSkin = 0, score = 0, best = Number(localStorage.getItem('kanatBest') || 0);
