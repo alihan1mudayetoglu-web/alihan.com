@@ -6,20 +6,23 @@
     <meta name="description" content="Alihan'ın kişisel yazılım portföyü">
     <title>Alihan | Kişisel Portföy</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome İkonlar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --turquoise: #31AAA9;
-            --cream: #F8E0A4;
-            --red: #A82020;
-            --dark-red: #6C1A1A;
-            --dark: #171717;
-            --light: #fffaf0;
+            --bg-dark: #181a1f;
+            --bg-card: #22252c;
+            --bg-card-hover: #282c34;
+            --border-color: #323640;
+            --accent-gold: #f5b942;
+            --accent-gold-hover: #ffca5c;
+            --accent-gold-dim: rgba(245, 185, 66, 0.12);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
         }
 
         * {
@@ -30,1322 +33,879 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--light);
-            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.65;
             overflow-x: hidden;
         }
 
-        section {
-            padding: 100px 0;
-            scroll-margin-top: 85px;
+        .container {
+            width: min(1080px, 92%);
+            margin: 0 auto;
         }
 
         /* NAVBAR */
-        .navbar {
-            background: rgba(248, 224, 164, .97);
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(24, 26, 31, 0.94);
             backdrop-filter: blur(12px);
-            padding: 12px 0;
-            box-shadow: 0 3px 20px rgba(0, 0, 0, .06);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 14px 0;
         }
 
-        /* LOGO.PNG */
-        .navbar-logo {
-            width: 58px;
-            height: 58px;
-            object-fit: contain;
-            display: block;
-            border-radius: 12px;
-            transition: .3s;
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .navbar-logo:hover {
-            transform: scale(1.08);
-        }
-
-        .nav-link {
-            color: var(--dark-red);
-            font-weight: 500;
-            margin-left: 12px;
-            transition: .3s;
-        }
-
-        .nav-link:hover {
-            color: var(--turquoise);
-        }
-
-        .section-title {
-            font-size: clamp(30px, 4vw, 42px);
-            font-weight: 800;
-            color: var(--dark-red);
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            color: #666;
-            margin-bottom: 45px;
-        }
-
-        .highlight {
-            color: var(--turquoise);
-        }
-
-        /* ANA SAYFA */
-        #home {
-            min-height: 100vh;
+        .brand {
             display: flex;
             align-items: center;
-            background:
-                radial-gradient(circle at 85% 20%, rgba(49,170,169,.22), transparent 30%),
-                linear-gradient(135deg, var(--cream), #fffaf0);
-            padding-top: 130px;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--accent-gold);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 18px;
         }
 
-        .hero-label {
-            display: inline-block;
-            background: rgba(49,170,169,.15);
-            color: #176e6d;
-            padding: 9px 17px;
-            border-radius: 30px;
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
             font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 25px;
+            font-weight: 500;
+            transition: color 0.25s;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* ANA SAYFA (HERO) */
+        #home {
+            padding: 155px 0 95px;
+            text-align: center;
         }
 
         .hero-title {
-            font-size: clamp(42px, 7vw, 76px);
+            font-size: clamp(36px, 5vw, 56px);
             font-weight: 800;
-            line-height: 1.15;
-            color: var(--dark-red);
-            margin-bottom: 22px;
-        }
-
-        .hero-text {
-            color: #555;
-            font-size: 17px;
-            line-height: 1.9;
-            max-width: 550px;
-            margin-bottom: 30px;
-        }
-
-        .btn-main,
-        .btn-outline {
-            padding: 13px 25px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: .3s;
-            margin: 4px;
-        }
-
-        .btn-main {
-            background: var(--red);
-            color: white;
-            border: 2px solid var(--red);
-        }
-
-        .btn-main:hover {
-            background: var(--dark-red);
-            border-color: var(--dark-red);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .btn-outline {
-            color: var(--dark-red);
-            border: 2px solid var(--dark-red);
-        }
-
-        .btn-outline:hover {
-            background: var(--dark-red);
-            color: white;
-        }
-
-        .hero-card {
-            width: min(100%, 370px);
-            margin: auto;
-            background: var(--dark-red);
-            border-radius: 35px;
-            padding: 35px;
-            color: white;
-            text-align: center;
-            box-shadow: 0 25px 60px rgba(108,26,26,.2);
-            transform: rotate(2deg);
-            transition: .4s;
-        }
-
-        .hero-card:hover {
-            transform: rotate(0) translateY(-8px);
-        }
-
-        .avatar {
-            width: 155px;
-            height: 155px;
-            background: var(--cream);
-            color: var(--dark-red);
-            border: 6px solid rgba(255,255,255,.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 55px;
-            font-weight: 800;
-            margin: 0 auto 25px;
-        }
-
-        .hero-card h3 {
-            font-size: 27px;
-            font-weight: 700;
-        }
-
-        .hero-card p {
-            color: #f3dada;
-        }
-
-        .code-decoration {
-            display: inline-block;
-            color: var(--cream);
-            background: rgba(255,255,255,.1);
-            border-radius: 10px;
-            padding: 9px 14px;
-            margin-top: 15px;
-            font-family: monospace;
-        }
-
-        /* HAKKIMDA */
-        #about {
-            background: white;
-        }
-
-        .about-box {
-            background: var(--light);
-            padding: 35px;
-            border-radius: 22px;
-            height: 100%;
-            border-left: 5px solid var(--turquoise);
-        }
-
-        .about-box h3 {
-            color: var(--dark-red);
-            font-weight: 700;
+            letter-spacing: -1px;
             margin-bottom: 18px;
         }
 
-        .about-description {
-            color: #555;
-            line-height: 2;
+        .hero-title span {
+            color: var(--accent-gold);
         }
 
-        .info-item {
-            padding: 13px 0;
-            border-bottom: 1px solid #e9e3d6;
+        .hero-desc {
+            max-width: 630px;
+            margin: 0 auto 30px;
+            color: var(--text-muted);
+            font-size: 16px;
         }
 
-        .info-item:last-child {
-            border-bottom: none;
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
         }
 
-        .info-item strong {
-            color: var(--dark-red);
+        .btn-gold {
+            background: var(--accent-gold);
+            color: #181a1f;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.25s;
         }
 
-        /* YETENEKLER */
-        #skills {
-            background: var(--cream);
+        .btn-gold:hover {
+            background: var(--accent-gold-hover);
+            transform: translateY(-2px);
         }
 
-        .skill-card {
-            background: white;
-            padding: 30px 24px;
-            border-radius: 20px;
-            height: 100%;
-            transition: .3s;
+        .btn-outline-gold {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.25s;
         }
 
-        .skill-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,.08);
+        .btn-outline-gold:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
         }
 
-        .skill-icon {
-            width: 58px;
-            height: 58px;
-            background: rgba(49,170,169,.15);
-            border-radius: 16px;
+        /* MOTTO KUTUSU */
+        .quote-box {
+            max-width: 660px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 10px;
+            padding: 18px 24px;
+            text-align: left;
+            position: relative;
+        }
+
+        .quote-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .quote-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: #e5e7eb;
+            font-size: 14.5px;
+        }
+
+        .quote-icon {
+            position: absolute;
+            right: 20px;
+            top: 18px;
+            font-size: 26px;
+            color: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ORTAK BÖLÜM BAŞLIKLARI */
+        section {
+            padding: 65px 0;
+            scroll-margin-top: 75px;
+        }
+
+        .section-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 27px;
-            margin-bottom: 20px;
+            gap: 12px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
         }
 
-        .skill-card h4 {
-            color: var(--dark-red);
-            font-weight: 700;
+        .section-header i {
+            color: var(--accent-gold);
             font-size: 20px;
         }
 
-        .skill-card p {
-            color: #666;
+        .section-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 26px;
+            transition: border-color 0.25s;
+        }
+
+        .card:hover {
+            border-color: rgba(245, 185, 66, 0.45);
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .card-title i {
+            color: var(--accent-gold);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 14.5px;
+            margin-bottom: 14px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 11px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14.5px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-list strong {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* GELİŞİM SÜRECİ */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -28px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .timeline-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .timeline-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px 20px;
+            color: var(--text-muted);
             font-size: 14px;
-            line-height: 1.8;
         }
 
-        .learning-note {
-            background: var(--dark-red);
-            color: white;
-            padding: 22px 25px;
-            border-radius: 15px;
-            margin-top: 35px;
-        }
-
-        /* PROJELER */
-        #projects {
-            background: white;
-        }
-
+        /* PROJE & OYUN KARTLARI */
         .project-card {
-            background: var(--light);
-            border-radius: 22px;
-            overflow: hidden;
-            height: 100%;
-            transition: .3s;
-            box-shadow: 0 5px 20px rgba(0,0,0,.04);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.25s, border-color 0.25s;
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 40px rgba(0,0,0,.1);
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
         }
 
-        .project-cover {
-            min-height: 185px;
+        .project-top {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            font-size: 60px;
+            margin-bottom: 16px;
         }
 
-        .cover-one {
-            background: linear-gradient(135deg, var(--turquoise), #b3e4df);
+        .project-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+            display: grid;
+            place-items: center;
+            font-size: 18px;
         }
 
-        .cover-two {
-            background: linear-gradient(135deg, var(--red), #e5a09a);
+        .project-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--accent-gold);
+            border: 1px solid rgba(245, 185, 66, 0.25);
         }
 
-        .cover-three {
-            background: linear-gradient(135deg, var(--cream), #fff3d1);
-        }
-
-        .project-content {
-            padding: 27px;
-        }
-
-        .project-content h4 {
-            color: var(--dark-red);
+        .project-card h3 {
+            font-size: 18px;
             font-weight: 700;
-            font-size: 21px;
+            margin-bottom: 10px;
+            color: var(--text-main);
         }
 
-        .project-content p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.8;
+        .project-card p {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .tags {
+            margin-bottom: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .tag {
-            display: inline-block;
-            background: rgba(49,170,169,.14);
-            color: #176e6d;
-            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #d1d5db;
+            padding: 3px 9px;
+            border-radius: 5px;
+        }
+
+        .btn-project {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--accent-gold);
+            background: transparent;
+            color: var(--accent-gold);
+            font-size: 13px;
             font-weight: 600;
-            padding: 6px 11px;
-            border-radius: 20px;
-            margin: 3px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s;
         }
 
-        /* HEDEFLER */
-        #goals {
-            background: var(--dark-red);
-            color: white;
+        .btn-project:hover {
+            background: var(--accent-gold);
+            color: #181a1f;
         }
 
-        #goals .section-title {
-            color: var(--cream);
+        /* YETENEKLERİM */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
         }
 
-        #goals .section-subtitle {
-            color: #ead1d1;
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 22px;
+            transition: transform 0.25s, border-color 0.25s;
         }
 
-        .goal-card {
-            border: 1px solid rgba(255,255,255,.2);
-            background: rgba(255,255,255,.06);
-            padding: 28px;
-            border-radius: 20px;
-            height: 100%;
-            transition: .3s;
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-gold);
         }
 
-        .goal-card:hover {
-            background: rgba(255,255,255,.12);
-            transform: translateY(-5px);
-        }
-
-        .goal-card h4 {
-            color: var(--cream);
+        .skill-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+            display: grid;
+            place-items: center;
             font-size: 20px;
-            font-weight: 700;
-            margin: 15px 0 10px;
+            margin-bottom: 14px;
         }
 
-        .goal-card p {
-            color: #eadada;
+        .skill-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .skill-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .learning-note {
+            margin-top: 22px;
+            background: var(--bg-card);
+            border: 1px solid rgba(245, 185, 66, 0.35);
+            border-radius: 10px;
+            padding: 16px 20px;
+            color: #e5e7eb;
             font-size: 14px;
-            line-height: 1.8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .learning-note i {
+            color: var(--accent-gold);
+            font-size: 18px;
         }
 
         .goal-icon {
-            font-size: 35px;
+            font-size: 24px;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
         }
 
         /* İLETİŞİM */
-        #contact {
-            background: var(--light);
-        }
-
         .contact-box {
-            max-width: 750px;
-            margin: auto;
-            background: white;
-            padding: 45px;
-            border-radius: 25px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 36px;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,.05);
         }
 
         .contact-box h3 {
-            color: var(--dark-red);
-            font-weight: 800;
-            margin-bottom: 15px;
+            font-size: 22px;
+            margin-bottom: 10px;
         }
 
         .contact-box p {
-            color: #666;
-            line-height: 1.8;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto 24px;
+            font-size: 14.5px;
         }
 
         /* FOOTER */
         footer {
-            background: #171717;
-            color: #ddd;
-            padding: 25px 0;
+            border-top: 1px solid var(--border-color);
+            padding: 26px 0;
             text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 30px;
         }
 
         footer .footer-name {
-            color: var(--turquoise);
+            color: var(--accent-gold);
             font-weight: 700;
         }
 
-        /* YUKARI ÇIK */
-        #backToTop {
-            position: fixed;
-            right: 22px;
-            bottom: 22px;
-            width: 48px;
-            height: 48px;
-            border: none;
-            border-radius: 14px;
-            background: var(--turquoise);
-            color: white;
-            font-size: 23px;
-            cursor: pointer;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 5px 18px rgba(0,0,0,.15);
-        }
-
-        #backToTop:hover {
-            background: var(--dark-red);
-        }
-
-        /* ANİMASYON */
-        .reveal {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity .7s ease, transform .7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 991px) {
-            .navbar-collapse {
-                padding-top: 15px;
+        /* MOBİL UYUM */
+        @media (max-width: 850px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
             }
-
-            .nav-link {
-                margin-left: 0;
-                padding: 10px 0;
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            #home {
-                text-align: center;
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 68px;
+                right: 4%;
+                background: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: 10px;
+                padding: 16px 24px;
+                width: 210px;
             }
-
-            .hero-text {
-                margin-left: auto;
-                margin-right: auto;
+            nav ul.active {
+                display: flex;
             }
-
-            .hero-card {
-                margin-top: 50px;
-            }
-
-            section {
-                padding: 75px 0;
+            .mobile-menu-btn {
+                display: block;
             }
         }
 
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 43px;
-            }
-
-            .about-box,
-            .contact-box {
-                padding: 25px;
-            }
-
-            .navbar-logo {
-                width: 50px;
-                height: 50px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                scroll-behavior: auto !important;
-                transition-duration: .01ms !important;
-            }
-
-            .reveal {
-                opacity: 1;
-                transform: none;
+        @media (max-width: 480px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-
-            <!-- logo.png DOSYASI -->
-            <a href="#home" aria-label="Alihan ana sayfa">
-                <img
-                    src="./logo.png"
-                    alt="Alihan AA Logo"
-                    class="navbar-logo"
-                    width="58"
-                    height="58"
-                >
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#home" class="brand" aria-label="Alihan ana sayfa">
+                <span># Alihan</span>
             </a>
 
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarMenu"
-                    aria-controls="navbarMenu"
-                    aria-expanded="false"
-                    aria-label="Menüyü aç veya kapat">
-                <span class="navbar-toggler-icon"></span>
+            <button class="mobile-menu-btn" id="menuBtn" aria-label="Menüyü aç veya kapat">
+                <i class="fa-solid fa-bars"></i>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarMenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Ana Sayfa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">Hakkımda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Yeteneklerim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projelerim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#goals">Hedeflerim</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Ana Sayfa</a></li>
+                    <li><a href="#about">Hakkımda</a></li>
+                    <li><a href="#games">Oyunlarım</a></li>
+                    <li><a href="#projects">GitHub Projelerim</a></li>
+                    <li><a href="#skills">Yeteneklerim</a></li>
+                    <li><a href="#goals">Hedeflerim</a></li>
+                    <li><a href="#contact">İletişim</a></li>
                 </ul>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- ANA SAYFA -->
     <section id="home">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <span class="hero-label">💻 Genç Yazılım Geliştirici Adayı</span>
+            <h1 class="hero-title">
+                Merhaba, Ben <span>Alihan!</span>
+            </h1>
 
-                    <h1 class="hero-title">
-                        Merhaba,<br>
-                        Ben <span class="highlight">Alihan!</span>
-                    </h1>
+            <p class="hero-desc">
+                13 yaşındayım ve yazılım dersleri alıyorum.
+                Kod yazarak yeni şeyler öğrenmeyi, kendi projelerimi
+                geliştirmeyi ve hayal ettiğim fikirleri gerçeğe
+                dönüştürmeyi seviyorum.
+            </p>
 
-                    <p class="hero-text">
-                        13 yaşındayım ve yazılım dersleri alıyorum.
-                        Kod yazarak yeni şeyler öğrenmeyi, kendi projelerimi
-                        geliştirmeyi ve hayal ettiğim fikirleri gerçeğe
-                        dönüştürmeyi seviyorum.
-                    </p>
+            <div class="hero-buttons">
+                <a href="#games" class="btn-gold"><i class="fa-solid fa-gamepad"></i> Oyunlarımı Oyna</a>
+                <a href="#projects" class="btn-outline-gold"><i class="fa-brands fa-github"></i> GitHub Projelerim</a>
+                <a href="#about" class="btn-outline-gold">Beni Tanı</a>
+            </div>
 
-                    <a href="#projects" class="btn-main">Projelerimi Keşfet ↗</a>
-                    <a href="#about" class="btn-outline">Beni Tanı</a>
-                </div>
-
-                <div class="col-lg-5">
-                    <div class="hero-card">
-                        <div class="avatar">A</div>
-                        <h3>Alihan</h3>
-                        <p>Merak et · Öğren · Geliştir</p>
-                        <div class="code-decoration">
-                            &lt;code&gt; Hayallerim &lt;/code&gt;
-                        </div>
-                    </div>
-                </div>
+            <div class="quote-box">
+                <span class="quote-label">// MOTTO</span>
+                <p class="quote-text">&lt;code&gt; Merak et · Öğren · Geliştir · Hayallerim &lt;/code&gt;</p>
+                <i class="fa-solid fa-quote-right quote-icon"></i>
             </div>
         </div>
     </section>
-    <!doctype html>
-<html lang="tr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="theme-color" content="#101b2b">
-  <title>Kanat Çırp! — Alihan</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700;800;900&display=swap');
-    :root{--ink:#142235;--muted:#758398;--cream:#f4f4ef;--yellow:#f8cf56;--teal:#32baa7;--border:#e6e8e5}
-    *{box-sizing:border-box}
-    body{margin:0;min-height:100vh;background:#f4f4ef;color:var(--ink);font-family:Nunito,system-ui,sans-serif;display:grid;place-items:center;padding:20px}
-    .shell{width:min(1120px,100%)}
-    .topbar{height:55px;display:flex;align-items:flex-start;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:#1a2a3d;font-size:14px;font-weight:900;letter-spacing:1.7px}
-    .brand b{color:#e8ae28}
-    .brand-mark{width:26px;height:26px;border-radius:8px;background:#f7ca51;color:#273a4a;display:grid;place-items:center;font-size:18px}
-    .top-note,.credit,footer,.card-label,.progress-caption{font:10px 'DM Mono',monospace;letter-spacing:1px}
-    .top-note{color:#82909d;display:flex;align-items:center;gap:8px;margin-top:8px}
-    .live-dot{width:7px;height:7px;background:#36bba0;border-radius:50%;box-shadow:0 0 0 4px #36bba01c}
-    .sound-button{border:1px solid var(--border);background:#fff;border-radius:50%;height:34px;width:34px;color:#68788a;font-size:17px;cursor:pointer}
-    .game-layout{display:grid;grid-template-columns:minmax(0,760px) 1fr;gap:26px;align-items:stretch}
-    .game-frame{height:min(72vh,580px);min-height:440px;position:relative;overflow:hidden;border-radius:17px;background:#9eddf0;box-shadow:0 22px 50px #172e401a,0 3px 8px #172e400b}
-    canvas{width:100%;height:100%;display:block}
-    .hud{position:absolute;inset:17px 18px auto;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none}
-    .pause-button{pointer-events:auto;border:1px solid #ffffff70;background:#10263b37;color:white;border-radius:10px;width:39px;height:37px;display:flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;backdrop-filter:blur(8px)}
-    .pause-button span{height:13px;width:3px;background:#fff;border-radius:3px}
-    .score-pill{position:absolute;left:50%;transform:translateX(-50%);top:0;display:grid;justify-items:center;color:#fff;text-shadow:0 2px 8px #13324c72}
-    .score-pill small{font:9px 'DM Mono',monospace;letter-spacing:2px}
-    .score-pill b{font-size:42px;line-height:1.08}
-    .best-pill{margin-left:auto;color:white;background:#10263b36;border:1px solid #ffffff50;backdrop-filter:blur(8px);border-radius:8px;padding:8px 11px;font-size:12px}
-    .best-pill span{font:9px 'DM Mono',monospace;letter-spacing:.8px;margin:0 5px}
-    .best-pill b{font-size:13px}
-    .overlay{position:absolute;inset:0;display:grid;place-items:center;background:#10253a36;backdrop-filter:blur(2px);transition:opacity .2s}
-    .overlay.hidden{opacity:0;pointer-events:none}
-    .panel{width:min(380px,calc(100% - 34px));background:#fffef9;border:1px solid #fff;border-radius:18px;text-align:center;padding:22px 30px 18px;box-shadow:0 18px 55px #16344a35;position:relative;max-height:calc(100% - 24px);overflow:auto;animation:panel-in .28s ease-out}
-    @keyframes panel-in{from{transform:translateY(9px);opacity:.5}to{transform:translateY(0);opacity:1}}
-    .eyebrow{font:9px 'DM Mono',monospace;letter-spacing:1px;color:#8a97a3}
-    .eyebrow span{color:#e5b639;font-size:13px;margin-right:5px}
-    .hero-bird{height:108px;width:145px;object-fit:contain;image-rendering:pixelated;margin:4px auto -4px;filter:drop-shadow(0 8px 4px #142c351f)}
-    h1{font-size:36px;line-height:.97;letter-spacing:-1.6px;margin:2px 0 10px;font-weight:900}
-    h1 em,.side-card h2 em{font-style:normal;color:#e7b332}
-    #panelText{font-size:12px;color:#778594;line-height:1.7;margin:0 0 16px}
-    .menu-actions{display:grid;gap:10px}
-    .primary-button,.secondary-button{border:0;border-radius:9px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font:800 11px Nunito,sans-serif;letter-spacing:1px}
-    .primary-button{background:#f5c64b;color:#223348;box-shadow:0 4px 0 #d9a930}
-    .primary-button b,.secondary-button b{font-size:19px;line-height:10px}
-    .secondary-button{background:#31bba6;color:white}
-    .secondary-row{display:flex;justify-content:center;gap:25px;padding:3px 0}
-    .text-button{border:0;background:transparent;color:#607183;font:800 9px Nunito,sans-serif;letter-spacing:.8px;cursor:pointer;padding:4px}
-    .text-button span{font-size:13px;color:#e2b23d;margin-right:3px}
-    .hint{color:#99a3ad;font:9px 'DM Mono',monospace}
-    .hint kbd{font:9px 'DM Mono',monospace;background:#f1f2ee;border:1px solid #e4e7e4;border-radius:4px;padding:3px 5px;color:#647384}
-    .subview{text-align:left;color:#657486;font-size:12px;line-height:1.65}
-    .subview h2{color:#1a2b40;font-size:20px;margin:0 0 7px}
-    .subview p{margin:6px 0 13px}
-    .back-button{border:0;background:none;color:#a27415;font:800 10px Nunito,sans-serif;letter-spacing:1px;padding:9px 0;cursor:pointer}
-    .skin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-    .skin-card{background:#f4f5ef;border:1px solid transparent;border-radius:9px;padding:8px 4px 6px;cursor:pointer;color:#536174;font:700 9px Nunito,sans-serif}
-    .skin-card.selected{border-color:#e8b633;background:#fff9e7}
-    .skin-card img{width:55px;height:53px;object-fit:contain;image-rendering:pixelated;display:block;margin:0 auto 3px}
-    .touch-hint{display:none;position:absolute;bottom:15px;left:50%;transform:translateX(-50%);color:#fff;background:#14283e5c;border:1px solid #ffffff3d;padding:8px 12px;border-radius:20px;white-space:nowrap;font:9px 'DM Mono',monospace;letter-spacing:.8px;pointer-events:none}
-    .touch-hint span{color:#f4c64d;margin-left:5px}
-    .side-info{display:flex;flex-direction:column;gap:13px}
-    .side-card{background:#fff;border:1px solid #ebede8;border-radius:13px;padding:20px}
-    .mission-card{flex:1;min-height:280px}
-    .card-icon{font-size:20px;color:#e7b33b;margin-bottom:18px}
-    .card-label{color:#96a0a6;font-size:9px}
-    .side-card h2{font-size:23px;line-height:1.13;letter-spacing:-.6px;margin:9px 0}
-    .side-card p{font-size:11px;color:#7e8b99;line-height:1.7;margin:10px 0 20px}
-    .mini-progress{height:5px;border-radius:5px;background:#edf0ed;overflow:hidden;margin-top:29px}
-    .mini-progress span{height:100%;width:26%;display:block;background:#36bba6;border-radius:5px}
-    .progress-caption{display:flex;justify-content:space-between;color:#99a3ab;font-size:8px;margin-top:9px}
-    .tip-card{display:flex;gap:12px;align-items:flex-start;padding:15px 17px}
-    .tip-icon{height:28px;width:28px;display:grid;place-items:center;border-radius:8px;background:#fff5d9;color:#d9a932;flex:none}
-    .tip-card b{font-size:11px}
-    .tip-card p{margin:3px 0 0;font-size:10px;line-height:1.5}
-    .credit{color:#aab2b7;text-align:center;font-size:8px;padding-top:3px}
-    .credit span{color:#e4b43b;margin:0 6px}
-    footer{color:#9aa3a8;display:flex;justify-content:space-between;padding:18px 2px 0;font-size:8px}
-    footer i{font-style:normal;color:#e7b53c;margin-left:6px}
-    button:focus-visible,a:focus-visible{outline:3px solid #34baa6;outline-offset:3px}
-    @media(max-width:780px){
-      body{padding:12px;display:block}
-      .shell{width:100%}
-      .topbar{height:44px;align-items:flex-start}
-      .top-note{font-size:8px;letter-spacing:.5px}
-      .game-layout{display:block}
-      .game-frame{height:min(76svh,680px);height:min(76vh,680px);min-height:390px;border-radius:13px}
-      .side-info{display:none}
-      footer{padding-top:12px}
-      .panel{padding:17px 23px 14px}
-      .hero-bird{height:85px}
-      .touch-hint{display:block}
-      .hud{inset:12px 12px auto}
-      .score-pill b{font-size:36px}
-    }
-    @media(max-width:400px){
-      .game-frame{height:74vh;min-height:360px}
-      .top-note{display:none}
-      .panel{width:calc(100% - 22px);padding:15px 18px 12px}
-      .hero-bird{height:75px}
-      h1{font-size:32px}
-      #panelText{font-size:11px;margin-bottom:11px}
-      .menu-actions{gap:8px}
-    }
-  </style>
-</head>
-<body>
-  <main class="shell">
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="Ana menü" id="brandHome"><span class="brand-mark">✦</span><span>KANAT <b>ÇIRP!</b></span></a>
-      <div class="top-note"><span class="live-dot"></span> TEK SEVİYE · SINIRSIZ EĞLENCE</div>
-      <button class="sound-button" id="soundButton" aria-label="Sesi aç veya kapat" title="Sesi aç veya kapat">♫</button>
-    </header>
 
-    <section class="game-layout" aria-label="Kanat Çırp oyunu">
-      <div class="game-frame" id="gameFrame">
-        <canvas id="gameCanvas" aria-label="Flappy Bird oyun alanı"></canvas>
-        <div class="hud" id="hud">
-          <button class="pause-button" id="pauseButton" aria-label="Oyunu duraklat" title="Duraklat"><span></span><span></span></button>
-          <div class="score-pill"><small>SKOR</small><b id="score">0</b></div>
-          <div class="best-pill">✦ <span>EN İYİ</span> <b id="bestScore">0</b></div>
-        </div>
-        <div class="overlay" id="overlay">
-          <div class="panel" id="panel">
-            <div class="eyebrow"><span>✦</span> PIXEL GÖKYÜZÜNE HAZIR MISIN?</div>
-            <img class="hero-bird" id="heroBird" src="img/1.png" alt="Sarı pixel kuş">
-            <h1 id="panelTitle">Kanatlarını<br><em>aç!</em></h1>
-            <p id="panelText">Boruların arasından süzül, rekorunu kır.<br>Her dokunuşta bir kanat çırpışı!</p>
-            <div class="menu-actions" id="menuActions">
-              <button class="primary-button" id="startButton"><span>OYUNU BAŞLAT</span><b>→</b></button>
-              <button class="secondary-button" id="resumeButton" hidden><span>DEVAM ET</span><b>→</b></button>
-              <div class="secondary-row">
-                <button class="text-button" id="costumesButton"><span>◈</span> KOSTÜMLER</button>
-                <button class="text-button" id="aboutButton"><span>ⓘ</span> HAKKINDA</button>
-              </div>
-              <div class="hint"><kbd>SPACE</kbd> veya <kbd>↑</kbd> ile uç</div>
-            </div>
-            <div class="subview" id="subview" hidden></div>
-          </div>
-        </div>
-        <div class="touch-hint" id="touchHint">DOKUN VE KANAT ÇIRP <span>↗</span></div>
-      </div>
-      <aside class="side-info">
-        <div class="side-card mission-card"><div class="card-icon">✧</div><div class="card-label">GÖREVİN</div><h2>Aradaki boşluğu<br>bul ve <em>uç!</em></h2><p>Her boru bir puan. Bir yere çarpmadan ne kadar ileri gidebilirsin?</p><div class="mini-progress"><span></span></div><div class="progress-caption"><span>SEVİYE 01</span><span>GÖKYÜZÜ</span></div></div>
-        <div class="side-card tip-card"><div class="tip-icon">✦</div><div><b>Minik bir ipucu</b><p>Kısa dokunuşlar yüksekliği kontrol etmeyi kolaylaştırır.</p></div></div>
-        <div class="credit">PIXEL ART <span>×</span> KANAT SESİ</div>
-      </aside>
-    </section>
-    <footer><span>© 2025 KANAT ÇIRP!</span><span>YÜKSEK SKORUNU KORU <i>✦</i></span></footer>
-  </main>
-
-  <script>
-  (() => {
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const overlay = document.getElementById('overlay');
-    const panelTitle = document.getElementById('panelTitle');
-    const panelText = document.getElementById('panelText');
-    const heroBird = document.getElementById('heroBird');
-    const startButton = document.getElementById('startButton');
-    const resumeButton = document.getElementById('resumeButton');
-    const subview = document.getElementById('subview');
-    const menuActions = document.getElementById('menuActions');
-    const scoreEl = document.getElementById('score');
-    const bestEl = document.getElementById('bestScore');
-    const pauseButton = document.getElementById('pauseButton');
-    const touchHint = document.getElementById('touchHint');
-
-    const skins = [
-      {name:'Altın', src:'img/1.png'},
-      {name:'Bulut', src:'img/2.png'},
-      {name:'456', src:'img/3..png'},
-      {name:'Cadı', src:'img/4..png'},
-      {name:'Düdük', src:'img/5..png'},
-      {name:'Glitch', src:'img/6..png'},
-      {name:'İtalya Forması', src:'img/7..png'},
-      {name:'İtalyan Şıklığı', src:'img/8..png'},
-      {name:'Ay Yıldız', src:'img/9..png'},
-      {name:'Real Madrid', src:'img/10..png'}
-    ];
-
-    const loaded = skins.map(s => {
-      const im = new Image();
-      im.src = s.src;
-      return im;
-    });
-
-    let state = 'menu';
-    let selectedSkin = 0;
-    let score = 0;
-    let best = Number(localStorage.getItem('kanatBest') || 0);
-    let bird, pipes, particles, lastTime = 0, spawnTimer = 0, audioCtx = null, muted = false;
-    let width = 0, height = 0, dpr = 1, world = {ground:0};
-
-    bestEl.textContent = best;
-
-    function resize(){
-      const rect = canvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = rect.width;
-      height = rect.height;
-      canvas.width = Math.round(width*dpr);
-      canvas.height = Math.round(height*dpr);
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      world.ground = height - Math.max(54, height*.105);
-      if (!bird || state === 'menu') resetBird();
-      draw();
-    }
-
-    function resetBird(){
-      bird={x:width*.28,y:height*.44,vy:0,rotation:0};
-      pipes=[];
-      particles=[];
-      score=0;
-      spawnTimer=.7;
-      scoreEl.textContent='0';
-    }
-
-    function showMenu(mode='main'){
-      state='menu';
-      overlay.classList.remove('hidden');
-      menuActions.hidden=false;
-      subview.hidden=true;
-      touchHint.style.display='none';
-      resumeButton.hidden=mode!=='pause';
-      startButton.hidden=mode==='pause';
-
-      if(mode==='pause'){
-        panelTitle.innerHTML='Bir mola<br><em>verelim!</em>';
-        panelText.textContent='Gökyüzü seni bekliyor. Hazır olduğunda devam et.';
-      } else if(mode==='over'){
-        panelTitle.innerHTML='Uçuş sona<br><em>erdi!</em>';
-        panelText.textContent=`Harika deneme! ${score} boruyu geçtin. Bir tur daha?`;
-      } else {
-        panelTitle.innerHTML='Kanatlarını<br><em>aç!</em>';
-        panelText.innerHTML='Boruların arasından süzül, rekorunu kır.<br>Her dokunuşta bir kanat çırpışı!';
-      }
-
-      heroBird.src=skins[selectedSkin].src;
-      draw();
-    }
-
-    function begin(){
-      resetBird();
-      state='playing';
-      overlay.classList.add('hidden');
-      touchHint.style.display='block';
-      lastTime=performance.now();
-      requestAnimationFrame(loop);
-      sound(620,.07);
-    }
-
-    function flap(){
-      if(state!=='playing') return;
-      bird.vy=-height*.64;
-      bird.rotation=-.35;
-      sound(500,.055);
-      for(let i=0;i<3;i++){
-        particles.push({
-          x:bird.x-14,
-          y:bird.y+5,
-          vx:-30-Math.random()*30,
-          vy:(Math.random()-.5)*50,
-          life:.3
-        });
-      }
-    }
-
-    function pause(){
-      if(state==='playing') showMenu('pause');
-    }
-
-    function sound(freq,duration){
-      if(muted) return;
-      try{
-        audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();
-        if(audioCtx.state==='suspended') audioCtx.resume();
-        const o=audioCtx.createOscillator();
-        const g=audioCtx.createGain();
-        o.type='sine';
-        o.frequency.value=freq;
-        g.gain.setValueAtTime(.035,audioCtx.currentTime);
-        g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);
-        o.connect(g);
-        g.connect(audioCtx.destination);
-        o.start();
-        o.stop(audioCtx.currentTime+duration);
-      }catch{}
-    }
-
-    function addPipe(){
-      const gap=Math.max(145,height*.29);
-      const margin=75;
-      const top=margin+Math.random()*(world.ground-gap-margin*2);
-      pipes.push({x:width+30,top,gap,scored:false});
-    }
-
-    function gameOver(){
-      if(state!=='playing') return;
-      state='over';
-      sound(180,.25);
-      if(score>best){
-        best=score;
-        localStorage.setItem('kanatBest',best);
-        bestEl.textContent=best;
-      }
-      setTimeout(()=>showMenu('over'),450);
-    }
-
-    function loop(now){
-      if(state!=='playing') return;
-      const dt=Math.min((now-lastTime)/1000,.035);
-      lastTime=now;
-      update(dt);
-      draw();
-      if(state==='playing') requestAnimationFrame(loop);
-    }
-
-    function update(dt){
-      bird.vy+=height*1.75*dt;
-      bird.y+=bird.vy*dt;
-      bird.rotation=Math.min(.9,Math.max(-.45,bird.vy/(height*.9)));
-
-      spawnTimer-=dt;
-      if(spawnTimer<=0){
-        addPipe();
-        spawnTimer=1.65;
-      }
-
-      const speed=width*.38;
-      for(const p of pipes){
-        p.x-=speed*dt;
-        if(!p.scored&&p.x+58<bird.x){
-          p.scored=true;
-          score++;
-          scoreEl.textContent=score;
-          sound(850,.09);
-        }
-      }
-
-      pipes=pipes.filter(p=>p.x>-80);
-      for(const p of particles){
-        p.x+=p.vx*dt;
-        p.y+=p.vy*dt;
-        p.life-=dt;
-      }
-      particles=particles.filter(p=>p.life>0);
-
-      const r=15, bx=bird.x, by=bird.y;
-      if(by+r>=world.ground||by-r<=0){
-        gameOver();
-        return;
-      }
-
-      for(const p of pipes){
-        if(bx+r>p.x&&bx-r<p.x+58&&(by-r<p.top||by+r>p.top+p.gap)){
-          gameOver();
-          return;
-        }
-      }
-    }
-
-    function draw(){
-      if(!width||!height) return;
-
-      const sky=ctx.createLinearGradient(0,0,0,height);
-      sky.addColorStop(0,'#84d1ed');
-      sky.addColorStop(.68,'#c4e9ee');
-      sky.addColorStop(1,'#f5e8b4');
-      ctx.fillStyle=sky;
-      ctx.fillRect(0,0,width,height);
-
-      ctx.fillStyle='#b6dfc8';
-      ctx.beginPath();
-      ctx.moveTo(0,world.ground);
-      for(let x=0;x<=width+40;x+=40) ctx.lineTo(x,world.ground-38-Math.sin(x*.012+performance.now()*.00008)*19);
-      ctx.lineTo(width,world.ground);
-      ctx.fill();
-
-      ctx.fillStyle='#d4e5a8';
-      ctx.beginPath();
-      ctx.moveTo(0,world.ground);
-      for(let x=0;x<=width+35;x+=35) ctx.lineTo(x,world.ground-20-Math.sin(x*.018+1)*11);
-      ctx.lineTo(width,world.ground);
-      ctx.fill();
-
-      drawCloud(width*.17,height*.17,1);
-      drawCloud(width*.73,height*.28,.75);
-      drawCloud(width*.55,height*.1,.48);
-
-      for(const p of pipes) drawPipe(p);
-
-      ctx.fillStyle='#dfbd70';
-      ctx.fillRect(0,world.ground,width,height-world.ground);
-      ctx.fillStyle='#82c783';
-      ctx.fillRect(0,world.ground,width,10);
-      ctx.fillStyle='#f1d28a';
-      for(let x=-20;x<width+30;x+=26) ctx.fillRect(x,world.ground+17,13,5);
-
-      for(const q of particles){
-        ctx.globalAlpha=Math.max(0,q.life/.3);
-        ctx.fillStyle='#fff3b0';
-        ctx.fillRect(q.x,q.y,4,4);
-      }
-      ctx.globalAlpha=1;
-
-      if(bird){
-        ctx.save();
-        ctx.translate(bird.x,bird.y);
-        ctx.rotate(bird.rotation||0);
-        const im=loaded[selectedSkin];
-        if(im.complete&&im.naturalWidth){
-          const size=selectedSkin>=3?66:58;
-          ctx.imageSmoothingEnabled=false;
-          ctx.drawImage(im,-size/2,-size/2,size,size);
-        } else {
-          ctx.fillStyle='#ffd34c';
-          ctx.beginPath();
-          ctx.arc(0,0,19,0,Math.PI*2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
-    }
-
-    function drawCloud(x,y,s){
-      ctx.fillStyle='#ffffff85';
-      ctx.beginPath();
-      ctx.arc(x,y,19*s,0,Math.PI*2);
-      ctx.arc(x+19*s,y-7*s,23*s,0,Math.PI*2);
-      ctx.arc(x+43*s,y,17*s,0,Math.PI*2);
-      ctx.fill();
-    }
-
-    function drawPipe(p){
-      const w=58,cap=9;
-      const grad=ctx.createLinearGradient(p.x,0,p.x+w,0);
-      grad.addColorStop(0,'#198e7b');
-      grad.addColorStop(.22,'#43c6a0');
-      grad.addColorStop(.8,'#32aa8e');
-      grad.addColorStop(1,'#168370');
-      ctx.fillStyle=grad;
-      ctx.strokeStyle='#116e66';
-      ctx.lineWidth=2;
-
-      ctx.fillRect(p.x,0,w,p.top-cap);
-      ctx.strokeRect(p.x+1,0,w-2,p.top-cap);
-      ctx.fillRect(p.x-5,p.top-cap-13,w+10,13);
-      ctx.strokeRect(p.x-5,p.top-cap-13,w+10,13);
-
-      const y=p.top+p.gap;
-      ctx.fillRect(p.x,y+cap,w,world.ground-y-cap);
-      ctx.strokeRect(p.x+1,y+cap,w-2,world.ground-y-cap);
-      ctx.fillRect(p.x-5,y,w+10,13);
-      ctx.strokeRect(p.x-5,y,w+10,13);
-    }
-
-    function showSub(which){
-      menuActions.hidden=true;
-      subview.hidden=false;
-      heroBird.style.display='none';
-      panelText.style.display='none';
-      panelTitle.style.display='none';
-
-      if(which==='skins'){
-        subview.innerHTML=`<button class="back-button" data-back>← MENÜYE DÖN</button><h2>Kostümünü seç</h2><p>Gökyüzüne hangi görünüşle çıkıyorsun?</p><div class="skin-grid">${skins.map((s,i)=>`<button class="skin-card ${i===selectedSkin?'selected':''}" data-skin="${i}"><img src="${s.src}" alt="${s.name}"><span>${s.name}</span></button>`).join('')}</div>`;
-      } else {
-        subview.innerHTML='<button class="back-button" data-back>← MENÜYE DÖN</button><h2>Nasıl oynanır?</h2><p><b>Dokun</b> ya da <b>Space / ↑</b> tuşuna basarak kanat çırp. Borulara ve yere çarpmadan aralıklardan geç; geçtiğin her boru sana bir puan kazandırır.</p><p>Duraklatmak için <b>Esc</b> tuşunu veya sol üstteki durdur düğmesini kullan.</p><p><b>Geliştirici:</b> Alihan</p>';
-      }
-
-      panelTitle.style.display='none';
-      heroBird.style.display='none';
-    }
-
-    function backToMain(){
-      panelTitle.style.display='';
-      panelText.style.display='';
-      heroBird.style.display='';
-      subview.hidden=true;
-      menuActions.hidden=false;
-    }
-
-    document.getElementById('startButton').addEventListener('click',begin);
-    resumeButton.addEventListener('click',()=>{
-      state='playing';
-      overlay.classList.add('hidden');
-      touchHint.style.display='block';
-      lastTime=performance.now();
-      requestAnimationFrame(loop);
-    });
-
-    document.getElementById('costumesButton').addEventListener('click',()=>showSub('skins'));
-    document.getElementById('aboutButton').addEventListener('click',()=>showSub('about'));
-
-    subview.addEventListener('click',e=>{
-      if(e.target.closest('[data-back]')){
-        backToMain();
-        return;
-      }
-      const b=e.target.closest('[data-skin]');
-      if(b){
-        selectedSkin=Number(b.dataset.skin);
-        heroBird.src=skins[selectedSkin].src;
-        showSub('skins');
-      }
-    });
-
-    pauseButton.addEventListener('click',pause);
-    document.getElementById('brandHome').addEventListener('click',e=>{
-      e.preventDefault();
-      if(state==='playing') pause();
-      else showMenu('main');
-    });
-
-    document.getElementById('soundButton').addEventListener('click',e=>{
-      muted=!muted;
-      e.currentTarget.textContent=muted?'×':'♫';
-      e.currentTarget.setAttribute('aria-label',muted?'Sesi aç':'Sesi kapat');
-    });
-
-    window.addEventListener('keydown',e=>{
-      if(['Space','ArrowUp'].includes(e.code)){
-        e.preventDefault();
-        if(state==='playing') flap();
-        else if(state==='menu'&&!overlay.classList.contains('hidden')&&subview.hidden) begin();
-      }
-      if(e.code==='Escape'){
-        e.preventDefault();
-        if(state==='playing') pause();
-        else if(state==='menu'){
-          if(!subview.hidden) backToMain();
-          else showMenu('main');
-        }
-      }
-    });
-
-    canvas.addEventListener('pointerdown',e=>{
-      e.preventDefault();
-      if(state==='playing') flap();
-    });
-
-    window.addEventListener('resize',resize);
-    resize();
-    showMenu('main');
-  })();
-  </script>
-</body>
-</html>
     <!-- HAKKIMDA -->
     <section id="about">
         <div class="container">
-            <div class="text-center reveal">
-                <h2 class="section-title">Hakkımda <span class="highlight">.</span></h2>
-                <p class="section-subtitle">Beni biraz daha yakından tanı.</p>
+            <div class="section-header">
+                <i class="fa-solid fa-user"></i>
+                <h2>Hakkımda</h2>
             </div>
 
-            <div class="row g-4">
-                <div class="col-lg-7 reveal">
-                    <div class="about-box">
-                        <h3>Ben kimim?</h3>
-                        <p class="about-description">
-                            Ben Alihan. 13 yaşında, teknolojiye ve yazılıma
-                            ilgi duyan bir öğrenciyim. Yazılım dersleri alarak
-                            programlamanın temellerini öğreniyorum.
-                            Kendi web sitelerimi ve oyun fikirlerimi geliştirmek,
-                            yeni teknolojiler keşfetmek ve her projede
-                            kendimi biraz daha ilerletmek istiyorum.
-                        </p>
-                        <p class="about-description mb-0">
-                            Benim için yazılım sadece kod yazmak değil;
-                            fikir üretmek, problem çözmek ve hayal gücünü
-                            kullanarak yeni şeyler ortaya çıkarmaktır.
-                        </p>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-code"></i>
+                        <span>Ben Kimim?</span>
                     </div>
+                    <p>
+                        13 yaşındayım ve yazılım dünyasına büyük bir merakla adım attım.
+                        Düzenli olarak yazılım dersleri alıyor; web geliştirme, algoritma mantığı
+                        ve oyun programlama üzerine pratik yapıyorum.
+                    </p>
+                    <p>
+                        Sadece hazır şeyler kullanmak yerine kendi oyunlarımı ve yazılımlarımı
+                        sıfırdan kodlamayı hedefliyorum.
+                    </p>
                 </div>
 
-                <div class="col-lg-5 reveal">
-                    <div class="about-box">
-                        <h3>Kişisel Bilgiler</h3>
-                        <div class="info-item"><strong>İsim:</strong> Alihan</div>
-                        <div class="info-item"><strong>Yaş:</strong> 13</div>
-                        <div class="info-item"><strong>Uğraş:</strong> Öğrenci</div>
-                        <div class="info-item"><strong>İlgi alanı:</strong> Yazılım ve teknoloji</div>
-                        <div class="info-item"><strong>Takımım:</strong> ❤️💛 Galatasaray</div>
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span>Kişisel Bilgiler</span>
                     </div>
+                    <ul class="info-list">
+                        <li><strong>İsim:</strong> <span>Alihan</span></li>
+                        <li><strong>Yaş:</strong> <span>13</span></li>
+                        <li><strong>Alan:</strong> <span>Yazılım Geliştirme &amp; Oyun Tasarımı</span></li>
+                        <li><strong>Durum:</strong> <span>Yazılım Dersleri Alıyor &amp; Proje Geliştiriyor</span></li>
+                        <li><strong>Odak:</strong> <span>Web, Python &amp; Tarayıcı Oyunları</span></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- YETENEKLER -->
-    <section id="skills">
+    <!-- GELİŞİM ZAMAN ÇİZELGESİ -->
+    <section id="timeline">
         <div class="container">
-            <div class="text-center reveal">
-                <h2 class="section-title">Yeteneklerim</h2>
-                <p class="section-subtitle">Öğrendiğim ve geliştirmek istediğim teknolojiler.</p>
+            <div class="section-header">
+                <i class="fa-solid fa-timeline"></i>
+                <h2>Yazılım Yolculuğum</h2>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3 reveal">
-                    <div class="skill-card">
-                        <div class="skill-icon">🌐</div>
-                        <h4>HTML</h4>
-                        <p>Web sayfalarının yapısını oluşturmayı ve içerikleri düzenlemeyi öğreniyorum.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-year">Başlangıç</span>
+                    <div class="timeline-box">
+                        Bilgisayar ve oyunların nasıl çalıştığını merak ederek kodlama dünyasına ilk adımı attım.
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3 reveal">
-                    <div class="skill-card">
-                        <div class="skill-icon">🎨</div>
-                        <h4>CSS</h4>
-                        <p>Renkler, tasarım, animasyonlar ve mobil uyumlu sayfalar üzerinde çalışıyorum.</p>
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-year">Eğitim &amp; Pratik</span>
+                    <div class="timeline-box">
+                        Yazılım dersleri almaya başladım. Algoritma kurma, Python ile oyun ve bilgi yarışması programlama ve Flask ile web temellerini öğrendim.
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-3 reveal">
-                    <div class="skill-card">
-                        <div class="skill-icon">⚡</div>
-                        <h4>JavaScript</h4>
-                        <p>Web sitelerine etkileşim kazandırmayı ve programlama mantığını öğreniyorum.</p>
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-year">Günümüz</span>
+                    <div class="timeline-box">
+                        Kendi kişisel web sitemi yayınlıyor, tarayıcı tabanlı oyunlar ve açık kaynak GitHub projeleri geliştiriyorum.
                     </div>
                 </div>
-
-                <div class="col-md-6 col-lg-3 reveal">
-                    <div class="skill-card">
-                        <div class="skill-icon">🧩</div>
-                        <h4>Bootstrap</h4>
-                        <p>Hazır bileşenlerle responsive arayüzler hazırlamayı öğreniyorum.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="learning-note reveal">
-                <strong>🚀 Öğrenmeye devam ediyorum!</strong>
-                <p class="mb-0 mt-2">
-                    Öğrendiklerimi sürekli geliştiriyor ve yeni projelerimde uyguluyorum.
-                </p>
             </div>
         </div>
     </section>
 
-    <!-- PROJELER -->
+    <!-- OYUNLARIM -->
+    <section id="games">
+        <div class="container">
+            <div class="section-header">
+                <i class="fa-solid fa-gamepad"></i>
+                <h2>Oyunlarım</h2>
+            </div>
+
+            <div style="max-width: 500px; margin: 0 auto;">
+                <div class="project-card">
+                    <div>
+                        <div class="project-top">
+                            <div class="project-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+                            <span class="project-badge">HTML5 Oyun</span>
+                        </div>
+                        <h3>Kanat Çırp! (Flappy Bird)</h3>
+                        <p>
+                            Engellerden kaçarak en yüksek skora ulaşabileceğin, tarayıcında doğrudan açıp oynayabileceğin veya güvenle indirebileceğin arcade oyunum.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">HTML5 Canvas</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Arcade</span>
+                        </div>
+                    </div>
+                    <a href="kanat-cirp.html" class="btn-project">
+                        <i class="fa-solid fa-play"></i> Oyunu İncele &amp; Oyna
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GITHUB PROJELERİM -->
     <section id="projects">
         <div class="container">
-            <div class="text-center reveal">
-                <h2 class="section-title">Projelerim</h2>
-                <p class="section-subtitle">Fikirlerimi kodlarla hayata geçirdiğim alan.</p>
+            <div class="section-header">
+                <i class="fa-brands fa-github"></i>
+                <h2>GitHub Projelerim</h2>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4 reveal">
-                    <div class="project-card">
-                        <div class="project-cover cover-one">🌐</div>
-                        <div class="project-content">
-                            <h4>Kişisel Web Sitesi</h4>
-                            <p>Kendimi tanıtmak, yeteneklerimi sergilemek ve projelerimi paylaşmak için hazırladığım portföy.</p>
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">Bootstrap</span>
+            <div class="grid-3">
+                <div class="project-card">
+                    <div>
+                        <div class="project-top">
+                            <div class="project-icon"><i class="fa-solid fa-hand-fist"></i></div>
+                            <span class="project-badge">Oyun &amp; Aksiyon</span>
+                        </div>
+                        <h3>BoxFight</h3>
+                        <p>
+                            İki karakter arasındaki mücadele ve aksiyon mekaniklerine dayanan,
+                            temel oyun fiziği ve çarpışma kontrollerini uyguladığım boks/dövüş oyunu projem.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Python / Oyun</span>
+                            <span class="tag">Aksiyon</span>
+                            <span class="tag">GitHub</span>
                         </div>
                     </div>
+                    <a href="https://github.com/alihan1mudayetoglu-web/BoxFight" target="_blank" rel="noopener noreferrer" class="btn-project">
+                        <i class="fa-brands fa-github"></i> Projeyi İncele
+                    </a>
                 </div>
 
-                <div class="col-md-6 col-lg-4 reveal">
-                    <div class="project-card">
-                        <div class="project-cover cover-two">🎮</div>
-                        <div class="project-content">
-                            <h4>Oyun Geliştirme</h4>
-                            <p>Kendi oyun fikirlerimi tasarlamak ve oyun mantığını öğrenmek istiyorum.</p>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Oyun</span>
-                            <span class="tag">Yaratıcılık</span>
+                <div class="project-card">
+                    <div>
+                        <div class="project-top">
+                            <div class="project-icon"><i class="fa-solid fa-circle-question"></i></div>
+                            <span class="project-badge">Bilgi Yarışması</span>
+                        </div>
+                        <h3>Kim Kod Milyoneri Olmak İster?</h3>
+                        <p>
+                            Yazılım ve algoritma bilgisini test eden, aşamalı soru yapısı ve
+                            puanlama mantığıyla geliştirdiğim interaktif kodlama bilgi yarışması projem.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Algoritma</span>
+                            <span class="tag">Quiz</span>
                         </div>
                     </div>
+                    <a href="https://github.com/alihan1mudayetoglu-web/Kim-Kod-Milyoneri-Olmak-Ister-" target="_blank" rel="noopener noreferrer" class="btn-project">
+                        <i class="fa-brands fa-github"></i> Projeyi İncele
+                    </a>
                 </div>
 
-                <div class="col-md-6 col-lg-4 reveal">
-                    <div class="project-card">
-                        <div class="project-cover cover-three">💡</div>
-                        <div class="project-content">
-                            <h4>Yeni Fikirler</h4>
-                            <p>Yeni web projeleri ve yaratıcı yazılım fikirleri üzerinde çalışmayı hedefliyorum.</p>
-                            <span class="tag">Kodlama</span>
-                            <span class="tag">Tasarım</span>
-                            <span class="tag">Öğrenme</span>
+                <div class="project-card">
+                    <div>
+                        <div class="project-top">
+                            <div class="project-icon"><i class="fa-solid fa-server"></i></div>
+                            <span class="project-badge">Web Backend</span>
+                        </div>
+                        <h3>Python Flask Web Uygulaması</h3>
+                        <p>
+                            Python'un Flask mikro web çatısını kullanarak geliştirdiğim; sayfa yönlendirmeleri
+                            (routing), dinamik şablonlar ve sunucu taraflı mantık içeren web projem.
+                        </p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Flask</span>
+                            <span class="tag">Web Geliştirme</span>
                         </div>
                     </div>
+                    <a href="https://github.com/alihan1mudayetoglu-web/PythonFlask" target="_blank" rel="noopener noreferrer" class="btn-project">
+                        <i class="fa-brands fa-github"></i> Projeyi İncele
+                    </a>
                 </div>
             </div>
-
-            <p class="text-center text-secondary mt-4 small">
-                Proje kartları örnektir. Gerçek projelerini ekledikçe burayı güncelleyebilirsin.
-            </p>
         </div>
     </section>
 
-    <!-- HEDEFLER -->
-    <section id="goals">
+    <!-- YETENEKLERİM -->
+    <section id="skills">
         <div class="container">
-            <div class="text-center reveal">
-                <h2 class="section-title">Hedeflerim</h2>
-                <p class="section-subtitle">Gelecekte başarmak istediğim şeyler.</p>
+            <div class="section-header">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h2>Yeteneklerim</h2>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-4 reveal">
-                    <div class="goal-card">
-                        <div class="goal-icon">📚</div>
-                        <h4>Kendimi Geliştirmek</h4>
-                        <p>Yazılım bilgimi artırmak, yeni diller öğrenmek ve daha iyi projeler geliştirmek.</p>
-                    </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-brands fa-html5"></i></div>
+                    <h4>HTML &amp; CSS</h4>
+                    <p>Modern, düzenli ve her ekrana uyumlu web sayfaları tasarlıyorum.</p>
                 </div>
 
-                <div class="col-md-4 reveal">
-                    <div class="goal-card">
-                        <div class="goal-icon">🎮</div>
-                        <h4>Kendi Oyunumu Yapmak</h4>
-                        <p>Kendi fikirlerimden yola çıkarak eğlenceli ve özgün oyunlar tasarlamak.</p>
-                    </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-brands fa-js"></i></div>
+                    <h4>JavaScript</h4>
+                    <p>Web sitelerine etkileşim kazandırıyor ve tarayıcı oyunları geliştiriyorum.</p>
                 </div>
 
-                <div class="col-md-4 reveal">
-                    <div class="goal-card">
-                        <div class="goal-icon">🚀</div>
-                        <h4>Yeni Projeler Üretmek</h4>
-                        <p>İnsanların kullanabileceği web siteleri ve uygulamalar geliştirmek.</p>
-                    </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+                    <h4>Python &amp; Flask</h4>
+                    <p>Algoritma kurma, oyun mekanikleri ve Flask ile web uygulamaları yazıyorum.</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h4>Problem Çözme</h4>
+                    <p>Karşılaştığım hataları analiz edip adım adım çözüme ulaştırıyorum.</p>
+                </div>
+            </div>
+
+            <div class="learning-note">
+                <i class="fa-solid fa-bolt"></i>
+                <span><strong>Sürekli Öğreniyorum:</strong> Aldığım yazılım dersleriyle her hafta yeni teknikler öğreniyor ve projelerime ekliyorum.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEDEFLERİM -->
+    <section id="goals">
+        <div class="container">
+            <div class="section-header">
+                <i class="fa-solid fa-bullseye"></i>
+                <h2>Hedeflerim</h2>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="goal-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <div class="card-title"><span>Kendi Oyunlarımı Yayınlamak</span></div>
+                    <p>İnsanların keyifle oynayabileceği, özgün mekaniklere sahip oyunlar geliştirip yayınlamak.</p>
+                </div>
+
+                <div class="card">
+                    <div class="goal-icon"><i class="fa-solid fa-rocket"></i></div>
+                    <div class="card-title"><span>Faydalı Yazılımlar Üretmek</span></div>
+                    <p>Günlük hayatta işe yarayan, pratik ve güvenli yazılım projeleri ortaya çıkarmak.</p>
+                </div>
+
+                <div class="card">
+                    <div class="goal-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="card-title"><span>Yazılımda İlerlemek</span></div>
+                    <p>Kendimi sürekli geliştirerek daha büyük ve profesyonel yazılım projelerine imza atmak.</p>
                 </div>
             </div>
         </div>
@@ -1354,14 +914,17 @@
     <!-- İLETİŞİM -->
     <section id="contact">
         <div class="container">
-            <div class="contact-box reveal">
-                <div style="font-size:45px; margin-bottom:15px;">✉️</div>
-                <h3>Yeni Fikirler Keşfedelim!</h3>
-                <p>
-                    Yazılım öğrenmeye, yeni şeyler üretmeye ve kendimi
-                    geliştirmeye devam ediyorum. Bu portföy, yolculuğumun başlangıcı.
-                </p>
-                <a href="#home" class="btn-main">Başa Dön ↑</a>
+            <div class="section-header">
+                <i class="fa-solid fa-envelope"></i>
+                <h2>İletişim</h2>
+            </div>
+
+            <div class="contact-box">
+                <h3>Benimle İletişime Geçin</h3>
+                <p>Projelerim hakkında konuşmak, geri bildirim vermek veya iş birliği yapmak için bana e-posta gönderebilirsiniz.</p>
+                <a href="mailto:alihan1mudayetoglu@gmail.com" class="btn-gold">
+                    <i class="fa-solid fa-paper-plane"></i> E-Posta Gönder
+                </a>
             </div>
         </div>
     </section>
@@ -1369,195 +932,27 @@
     <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p class="mb-1">
-                © <span id="year"></span>
-                <span class="footer-name">Alihan</span> · Kişisel Portföy
-            </p>
-            <small>Merakla öğren, tutkuyla üret. 💻</small>
+            <p>&copy; 2026 <span class="footer-name">Alihan</span>. Tüm hakları saklıdır.</p>
         </div>
     </footer>
 
-    <!-- YUKARI ÇIK -->
-    <button id="backToTop" aria-label="Sayfanın başına dön">↑</button>
-
-
-
-    <style>
-        /* Video penceresini ve videoyu belirgin şekilde küçült. */
-        #introVideoModal .modal-dialog {
-            width: 400px !important;
-            max-width: calc(100vw - 32px) !important;
-            margin: 1.75rem auto;
-        }
-
-        #introVideoModal .modal-content {
-            max-height: 80vh;
-            overflow: hidden;
-        }
-
-        #introVideoModal .modal-body {
-            padding: 0 !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #000;
-        }
-
-        #introVideoModal #introVideo {
-            width: 100% !important;
-            max-width: 400px !important;
-            height: auto !important;
-            max-height: 55vh !important;
-            object-fit: contain;
-        }
-
-        @media (max-width: 576px) {
-            #introVideoModal .modal-dialog {
-                width: calc(100vw - 32px) !important;
-                max-width: calc(100vw - 32px) !important;
-            }
-
-            #introVideoModal #introVideo {
-                max-height: 48vh !important;
-            }
-        }
-    </style>
-
-    <!-- TANITIM VİDEOSU MODALI -->
-    <div class="modal fade" id="introVideoModal" tabindex="-1"
-         aria-labelledby="introVideoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark border-0 overflow-hidden">
-                <div class="modal-header border-0 py-2">
-                    <h5 class="modal-title text-white" id="introVideoModalLabel">
-                        Alihan | Tanıtım
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white"
-                            data-bs-dismiss="modal" aria-label="Kapat"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <video id="introVideo" class="w-100 d-block"
-                           controls muted playsinline preload="auto">
-                        <source src="./video.mp4" type="video/mp4">
-                        Tarayıcınız video oynatmayı desteklemiyor.
-                    </video>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- JS: Mobil Menü İşlevselliği -->
     <script>
-        // Sayfa açıldıktan 3 saniye sonra tanıtım videosunu göster.
-        document.addEventListener("DOMContentLoaded", function () {
-            const videoModalElement = document.getElementById("introVideoModal");
-            const introVideo = document.getElementById("introVideo");
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
 
-            if (!videoModalElement || !introVideo || !window.bootstrap) return;
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
 
-            const videoModal = new bootstrap.Modal(videoModalElement);
-
-            setTimeout(function () {
-                videoModal.show();
-
-                // Otomatik oynatma, tarayıcı politikaları nedeniyle sessiz başlatılır.
-                const playPromise = introVideo.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function (error) {
-                        console.warn("Video otomatik başlatılamadı:", error);
-                    });
-                }
-            }, 3000);
-
-            // Video tamamlandığında modalı kapat.
-            introVideo.addEventListener("ended", function () {
-                videoModal.hide();
-            });
-
-            // Modal kapatılırsa videoyu durdur ve başa sar.
-            videoModalElement.addEventListener("hidden.bs.modal", function () {
-                introVideo.pause();
-                introVideo.currentTime = 0;
-            });
-
-            // Modal yeniden açılırsa videoyu baştan oynat.
-            videoModalElement.addEventListener("shown.bs.modal", function () {
-                introVideo.currentTime = 0;
-                introVideo.play().catch(function (error) {
-                    console.warn("Video oynatılamadı:", error);
-                });
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
             });
         });
     </script>
-
-
-
-    <script>
-        // Otomatik yıl
-        document.getElementById("year").textContent =
-            new Date().getFullYear();
-
-        // Yukarı çık butonu
-        const backToTop = document.getElementById("backToTop");
-
-        window.addEventListener("scroll", function () {
-            backToTop.style.display =
-                window.scrollY > 350 ? "block" : "none";
-        });
-
-        backToTop.addEventListener("click", function () {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        });
-
-        // Mobil menü bağlantılarına basınca kapat
-        const navbarMenu = document.getElementById("navbarMenu");
-
-        document.querySelectorAll(".navbar-nav .nav-link").forEach(function (link) {
-            link.addEventListener("click", function () {
-                if (navbarMenu.classList.contains("show")) {
-                    bootstrap.Collapse.getOrCreateInstance(navbarMenu).hide();
-                }
-            });
-        });
-
-        // Kaydırma animasyonları
-        const revealElements = document.querySelectorAll(".reveal");
-
-        if ("IntersectionObserver" in window) {
-            const observer = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.12
-            });
-
-            revealElements.forEach(function (element) {
-                observer.observe(element);
-            });
-        } else {
-            revealElements.forEach(function (element) {
-                element.classList.add("visible");
-            });
-        }
-
-        // Logo yüklenemezse konsola uyarı yaz
-        const logo = document.querySelector(".navbar-logo");
-
-        logo.addEventListener("error", function () {
-            console.error(
-                "Logo yüklenemedi. logo.png dosyasının index.html ile aynı klasörde olduğunu kontrol et."
-            );
-        });
-    </script>
+</body>
+</html>
 <elevenlabs-convai agent-id="agent_3601m68ay832fvgak3byfnq1n6aa"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
