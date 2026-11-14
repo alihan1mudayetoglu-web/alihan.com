@@ -747,38 +747,72 @@
     </section>
 
     <!-- OYUNLARIM -->
-    <section id="games">
-        <div class="container">
-            <div class="section-header">
-                <i class="fa-solid fa-gamepad"></i>
-                <h2>Oyunlarım</h2>
+<section id="games">
+    <div class="container">
+        <div class="section-header">
+            <i class="fa-solid fa-gamepad"></i>
+            <h2>Oyunlarım</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto;">
+            
+            <!-- Kanat Çırp Oyunu -->
+            <div class="project-card">
+                <div>
+                    <div class="project-top">
+                        <div class="project-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+                        <span class="project-badge">HTML5 Oyun</span>
+                    </div>
+                    <h3>Kanat Çırp! (Flappy Bird)</h3>
+                    <p>
+                        Engellerden kaçarak en yüksek skora ulaşabileceğin, tarayıcında doğrudan açıp oynayabileceğin veya güvenle indirebileceğin arcade oyunum.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">HTML5 Canvas</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Arcade</span>
+                    </div>
+                </div>
+                <a href="game/kanat-cirp.html" class="btn-project">
+                    <i class="fa-solid fa-play"></i> Oyunu İncele &amp; Oyna
+                </a>
             </div>
 
-            <div style="max-width: 500px; margin: 0 auto;">
-                <div class="project-card">
-                    <div>
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fa-solid fa-feather-pointed"></i></div>
-                            <span class="project-badge">HTML5 Oyun</span>
-                        </div>
-                        <h3>Kanat Çırp! (Flappy Bird)</h3>
-                        <p>
-                            Engellerden kaçarak en yüksek skora ulaşabileceğin, tarayıcında doğrudan açıp oynayabileceğin veya güvenle indirebileceğin arcade oyunum.
-                        </p>
-                        <div class="tags">
-                            <span class="tag">HTML5 Canvas</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Arcade</span>
-                        </div>
+            <!-- Pacman Dimension Oyunu (YENİ) -->
+            <div class="project-card">
+                <div>
+                    <div class="project-top">
+                        <div class="project-icon"><i class="fa-solid fa-ghost"></i></div>
+                        <span class="project-badge">APK &amp; Web</span>
                     </div>
-                    <a href="game/kanat-cirp.html" class="btn-project">
-    <i class="fa-solid fa-play"></i> Oyunu İncele &amp; Oyna
-</a>
-                    </a>
+                    <h3>Pacman Dimension</h3>
+                    <p>
+                        Klasik arcade kültürünü modern bir solukla ve boyut katmanlarıyla buluşturan, strateji ve hız dolu yeni nesil macera oyunu[cite: 2]!
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Cyberpunk</span>
+                        <span class="tag">Android APK</span>
+                        <span class="tag">Arcade</span>
+                    </div>
                 </div>
+                
+                <!-- QR Kod Alanı ve İndirme Butonu -->
+                <div style="text-align: center; margin: 15px 0; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px;">
+                    <!-- Gerçek projede buraya QR görselini (qr-code.png) ekleyebilirsin -->
+                    <div style="background: white; width: 100px; height: 100px; margin: 0 auto 10px auto; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                        <i class="fa-solid fa-qrcode" style="font-size: 60px; color: #111;"></i>
+                    </div>
+                    <span style="font-size: 0.85rem; color: #aaa;">APK'yı İndirmek İçin Tara</span>
+                </div>
+
+                <a href="#" class="btn-project" target="_blank">
+                    <i class="fa-solid fa-download"></i> APK İndir &amp; Oyna
+                </a>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- GITHUB PROJELERİM -->
     <section id="projects">
